@@ -4,10 +4,16 @@
  */
 package com.sg.cardealership.dto;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Cna
  */
 public class Special {
+	
+	private int id;
+	private BigDecimal price;
+	private String description;
     
 }
