@@ -4,6 +4,8 @@
  */
 package com.sg.cardealership.dto;
 
+import java.util.List;
+
 /**
  *
  * @author Cna
@@ -17,10 +19,14 @@ public class VehicleDto {
     private String transmission;
     private String msrp;
     private String salePrice;
-    
-    private ManufacturerDto manufacture;
     private String photo;
     private int mileage;
     private String description;
+    private boolean purchased;
+    private boolean featured;
+    
+    private ManufacturerDto manufacture;
+    private ModelDto model;
+    private List<OptionalFeatureDto> optional;
     
 }
