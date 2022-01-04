@@ -17,6 +17,9 @@ public class carDealershipController {
     //create a new data in contact info
     
     
-    //Sales/Index
+    //Sales/Index GET
     //search function that only available to sales person
+    
+    
+    
 }
