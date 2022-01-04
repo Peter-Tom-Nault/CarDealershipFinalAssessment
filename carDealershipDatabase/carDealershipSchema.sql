@@ -4,23 +4,23 @@ create database carDealership;
 use carDealership;
 
 CREATE TABLE `Vehicle` (
-  `VIN` varchar(255) PRIMARY KEY NOT NULL unique,
-  `makeID` int,
+  `VIN` varchar(17) PRIMARY KEY NOT NULL unique,
+  `makeID` mediumint,
   `modelID` int,
-  `modeYear` year,
+  `modelYear` year,
   `exteriorColor` varcharacter(255),
   `interiorColor` varcharacter(255),
   `bodytype` varcharacter(255),
   `transmission` varcharacter(255),
-  `msrp` decimal,
-  `saleprice` decimal,
+  `msrp` decimal(10,2),
+  `saleprice` decimal(10,2),
   `photo` varchar(255),
   `mileage` int,
   `description` mediumtext
 );
 
 CREATE TABLE `manufacturer` (
-  `id` int PRIMARY KEY NOT NULL auto_increment,
+  `id` mediumint PRIMARY KEY NOT NULL auto_increment,
   `name` varcharacter(255),
   `country` varcharacter(255)
 );
@@ -51,7 +51,7 @@ CREATE TABLE `user` (
 );
 
 CREATE TABLE `accountTypes` (
-  `accountTypeId` int PRIMARY KEY,
+  `accountTypeId` int PRIMARY KEY auto_increment,
   `accountType` varcharacter(255)
 );
 
@@ -60,6 +60,8 @@ ALTER TABLE `Vehicle` ADD FOREIGN KEY (`makeID`) REFERENCES `manufacturer` (`id`
 ALTER TABLE `Vehicle` ADD FOREIGN KEY (`modelID`) REFERENCES `model` (`id`);
 
 ALTER TABLE `user` ADD FOREIGN KEY (`accountType`) REFERENCES `accountTypes` (`accountTypeId`);
+
+Alter table `vehicleOptional` add primary key (`vehicleVin`, `featureId`);
 
 ALTER TABLE `vehicleOptional` ADD FOREIGN KEY (`vehicleVin`) REFERENCES `Vehicle` (`VIN`);
 
