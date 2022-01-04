@@ -4,18 +4,13 @@
  */
 package com.sg.cardealership.dto;
 
-import java.util.List;
-
 /**
  *
  * @author Cna
  */
-public class ModelDto {
-    private int id;
-    private String modelName;
-    private String trim;
-    
-    private ManufacturerDto manufacturer;
-    private List<Special> special;
-    
+public class Address {
+    private String street;
+    private String city;        
+    private String state;
+    private int zip;
 }
