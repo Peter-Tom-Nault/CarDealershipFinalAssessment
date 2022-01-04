@@ -16,7 +16,9 @@ CREATE TABLE `Vehicle` (
   `saleprice` decimal(10,2),
   `photo` varchar(255),
   `mileage` int,
-  `description` mediumtext
+  `description` mediumtext,
+  `purchased` boolean,
+  `featured` boolean
 );
 
 CREATE TABLE `manufacturer` (
@@ -28,7 +30,8 @@ CREATE TABLE `manufacturer` (
 CREATE TABLE `model` (
   `id` int PRIMARY KEY NOT NULL auto_increment,
   `modelName` varcharacter(255),
-  `trim` varcharacter(255)
+  `trim` varcharacter(255),
+  `make` mediumint
 );
 
 CREATE TABLE `vehicleOptional` (
@@ -47,12 +50,47 @@ CREATE TABLE `user` (
   `userId` int primary key auto_increment,
   `username` varcharacter(255) unique,
   `accountType` int,
-  `password` varchar(255)
+  `password` varchar(255),
+  `email` varchar(255)
+	
 );
 
 CREATE TABLE `accountTypes` (
   `accountTypeId` int PRIMARY KEY auto_increment,
   `accountType` varcharacter(255)
+);
+
+CREATE TABLE `special` (
+`id` int primary key auto_increment,
+`price` decimal(10,2),
+`description` mediumtext
+);
+
+create table `specialModel` (
+`specialId` int,
+`modelId` int,
+primary key(`specialId`, `modelId`)
+);
+
+create table `contactInformation` (
+`firstName` varChar(50),
+`lastName` varChar(50),
+`message` mediumtext,
+`email` varchar(255),
+`phone` int
+);
+
+create table `purchase` (
+`VIN` varchar(17),
+`salespersonId` int, 
+`date` date,
+`purchasePrice` decimal (10,2),
+`customerName` varchar(255),
+`streetAddress` varchar(255),
+`city` varchar(255),
+`state` varchar(255),
+`zip` int,
+`email` varchar(255)
 );
 
 ALTER TABLE `Vehicle` ADD FOREIGN KEY (`makeID`) REFERENCES `manufacturer` (`id`);
@@ -66,3 +104,13 @@ Alter table `vehicleOptional` add primary key (`vehicleVin`, `featureId`);
 ALTER TABLE `vehicleOptional` ADD FOREIGN KEY (`vehicleVin`) REFERENCES `Vehicle` (`VIN`);
 
 ALTER TABLE `vehicleOptional` ADD FOREIGN KEY (`featureId`) REFERENCES `optionalFeature` (`featureId`);
+
+ALTER TABLE `model` ADD FOREIGN KEY (`make`) REFERENCES `manufacturer` (`id`);
+
+ALTER TABLE `specialModel` ADD FOREIGN KEY (`specialId`) REFERENCES `special` (`id`);
+
+ALTER TABLE `specialModel` ADD FOREIGN KEY (`modelId`) REFERENCES `model` (`id`);
+
+ALTER TABLE `purchase` add foreign key (`salespersonId`) references `user` (`userId`);
+
+ALTER TABLE `purchase` add foreign key (`VIN`) references `Vehicle` (`VIN`);
