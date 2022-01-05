@@ -4,12 +4,7 @@
  */
 package com.sg.cardealership.service;
 
-import com.sg.cardealership.dto.ContactInformationDto;
-import com.sg.cardealership.dto.ManufacturerDto;
-import com.sg.cardealership.dto.ModelDto;
-import com.sg.cardealership.dto.Special;
-import com.sg.cardealership.dto.UserDto;
-import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.*;
 import java.util.List;
 import java.util.Map;
 import com.sg.cardealership.dao.*;
@@ -32,11 +27,17 @@ public class ServiceLayerImpl implements ServiceLayer{
 	UserDao users;
 	VehicleDao vehicles;
 
+	/**
+	 * return a list of vehicles that are featured
+	 */
     @Override
     public List<VehicleDto> ReturnFeatureAndSpecial() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	vehicles.getFeaturedVehicles();
     }
 
+    /**
+     * return list of vehicles that are new (0-1000 miles) and fit given criteria
+     */
     @Override
     public List<VehicleDto> getNewBasedOnUserEntry(Map<String, String> map) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -44,12 +45,12 @@ public class ServiceLayerImpl implements ServiceLayer{
 
     @Override
     public int insertContacts(ContactInformationDto ContactDto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	contactInfo.addContact(ContactDto);
     }
 
     @Override
     public List<Special> getSpecials() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	return specials.getAllSpecials();
     }
 
     @Override
@@ -58,9 +59,8 @@ public class ServiceLayerImpl implements ServiceLayer{
     }
 
 	@Override
-	public void purchase(int vehicleId, com.sg.cardealership.dto.purchase purchase) {
-		// TODO Auto-generated method stub
-		
+	public purchase purchase(int vehicleId, com.sg.cardealership.dto.purchase purchase) {
+		return purchases.addPurchase(vehicleId, purchase);
 	}
 
 	@Override
@@ -71,94 +71,100 @@ public class ServiceLayerImpl implements ServiceLayer{
 
 	@Override
 	public int adminAddCar(VehicleDto vehicle) {
-		// TODO Auto-generated method stub
-		return 0;
+		vehicles.addVehicle(vehicle);
 	}
 
 	@Override
 	public ResponseEntity<VehicleDto> adminUpdateVehicle(VehicleDto vehicle) {
-		// TODO Auto-generated method stub
-		return null;
+		return vehicles.updateVehicle(vehicle);
 	}
 
 	@Override
 	public List<UserDto> adminUserListRequest() {
-		// TODO Auto-generated method stub
-		return null;
+		return users.getAllUsers();
 	}
 
 	@Override
 	public int adminAddUser(UserDto user) {
-		// TODO Auto-generated method stub
+		users.addUsers(user);
 		return 0;
 	}
 
 	@Override
 	public int adminUpdateUser(UserDto user) {
-		// TODO Auto-generated method stub
+		
+		if(user.getPassword()user == null) {
+			users.updateUser(user, false);
+			return 1;
+		}		
+		else {
+			users.updateUser(user, true);
+			return 1;
+		}
 		return 0;
 	}
 
 	@Override
 	public int accountChangePass(Map<String, String> map) {
-		// TODO Auto-generated method stub
+		if(map.get("password").equals(map.get("confirmPassword"))) {
+			users.updateUser(currentUser, true);
+		}
 		return 0;
 	}
 
 	@Override
 	public List<ManufacturerDto> adminMakesList() {
-		// TODO Auto-generated method stub
-		return null;
+		return manufacturers.getAllMakes();
 	}
 
 	@Override
 	public int adminAddMake(ManufacturerDto make) {
-		// TODO Auto-generated method stub
+		manufacturers.addMake(make);
 		return 0;
 	}
 
 	@Override
 	public List<ModelDto> adminModelList() {
-		// TODO Auto-generated method stub
-		return null;
+		return models.getAllModels();
 	}
 
 	@Override
 	public int adminAddModel(ModelDto model) {
-		// TODO Auto-generated method stub
+		models.addModel(model);
 		return 0;
 	}
 
 	@Override
 	public int adminAddSpecial(Special special) {
-		// TODO Auto-generated method stub
+		specials.addSpecial(special)
 		return 0;
 	}
 
 	@Override
-	public int adminRemoveSpecial() {
-		// TODO Auto-generated method stub
+	public int adminRemoveSpecial(int specialId) {
+		specials.removeSpecialById(specialId);
 		return 0;
 	}
 
 	@Override
-	public int reportSales() {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<SalesReport> reportSales() {
+		return purchases.getSalesRecord();
 	}
 
 	@Override
-	public int reportInventoryNew() {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<InventoryReport> reportInventoryNew() {
+		return vehicles.getNewInventoryReport();
 	}
 
 	@Override
-	public int reportInventoryUsed() {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<InventoryReport> reportInventoryUsed() {
+		return vehicles.getUsedInventoryReport();
 	}
 
+	//Login questions, need to decide how to do logins
+	//proposal: have a data structure storing active users and a generated key for them that the browser has access to
+	//generate key on login and return and store that value until they log out
+	//browser includes that value in any requests that need account based permissions
 	@Override
 	public int accountLogin(Map<String, String> map) {
 		// TODO Auto-generated method stub
