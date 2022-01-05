@@ -14,6 +14,8 @@ public class UserDto {
     private String password;
     private AccountTypeDto account;
     private String email;
+    
+    
 	public int getUserId() {
 		return userId;
 	}

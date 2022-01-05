@@ -19,6 +19,11 @@ import org.springframework.jdbc.core.RowMapper;
 public class ManufacturerDaoImpl implements ManufacturerDao{
     @Autowired
     JdbcTemplate jdbc;
+
+    @Override
+    public ManufacturerDto getManufacturerById(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public static final class ManufacturerMapper implements RowMapper<ManufacturerDto> {
 

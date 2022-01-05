@@ -4,10 +4,14 @@
  */
 package com.sg.cardealership.dao;
 
+import com.sg.cardealership.dto.ManufacturerDto;
+
 /**
  *
  * @author Cna
  */
 public interface ManufacturerDao {
+
+    public ManufacturerDto getManufacturerById(int aInt);
     
 }

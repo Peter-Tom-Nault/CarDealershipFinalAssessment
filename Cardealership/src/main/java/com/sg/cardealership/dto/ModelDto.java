@@ -16,7 +16,6 @@ public class ModelDto {
     private String trim;
     
     private ManufacturerDto manufacturer;
-    private List<Special> special;
 	
     
     public int getId() {
@@ -43,13 +42,6 @@ public class ModelDto {
 	public void setManufacturer(ManufacturerDto manufacturer) {
 		this.manufacturer = manufacturer;
 	}
-	public List<Special> getSpecial() {
-		return special;
-	}
-	public void setSpecial(List<Special> special) {
-		this.special = special;
-	}
-    
     
     
 }

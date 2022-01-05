@@ -25,9 +25,9 @@ public class VehicleDto {
     private boolean purchased;
     private boolean featured;
     
-    //private ManufacturerDto manufacture;
     private ModelDto model;
     private List<OptionalFeatureDto> optional;
+    
 	public String getVin() {
 		return vin;
 	}

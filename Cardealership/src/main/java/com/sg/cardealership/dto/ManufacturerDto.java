@@ -13,9 +13,7 @@ public class ManufacturerDto {
     private String manufacturerName;
     private String country;
     
-    
-    
-
+        
 	public String getManufacturerName() {
 		return manufacturerName;
 	}
