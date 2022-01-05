@@ -19,7 +19,7 @@ import org.springframework.jdbc.core.RowMapper;
  */
 public class ModelDaoImpl {
     @Autowired
-    static JdbcTemplate jdbc;
+    JdbcTemplate jdbc;
     
     public static final class ModelDaoMapper implements RowMapper<ModelDto> {
 
@@ -29,15 +29,9 @@ public class ModelDaoImpl {
             model.setId(rs.getInt("id"));
             model.setModelName(rs.getString("modelName"));
             model.setTrim(rs.getString("trim"));            
-            model.setManufacturer(getManufacturerForModel(rs.getInt("make")));
             return model;
         }
     } 
     
-    private static ManufacturerDto getManufacturerForModel(int ManufacturerId) {
-        final String SELECT_MANUFACTURER_FOR_MODEL = "SELECT m.* FROM manufacturer m WHERE m.id = ?";
-        return jdbc.queryForObject(SELECT_MANUFACTURER_FOR_MODEL, new ManufacturerMapper(), 
-                ManufacturerId);
-    }
     
 }
