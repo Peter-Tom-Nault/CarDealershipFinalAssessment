@@ -99,10 +99,6 @@ ALTER TABLE `vehicleOptional` ADD FOREIGN KEY (`featureId`) REFERENCES `optional
 
 ALTER TABLE `model` ADD FOREIGN KEY (`make`) REFERENCES `manufacturer` (`id`);
 
-ALTER TABLE `specialModel` ADD FOREIGN KEY (`specialId`) REFERENCES `special` (`id`);
-
-ALTER TABLE `specialModel` ADD FOREIGN KEY (`modelId`) REFERENCES `model` (`id`);
-
 ALTER TABLE `purchase` add foreign key (`salespersonId`) references `user` (`userId`);
 
 ALTER TABLE `purchase` add foreign key (`VIN`) references `Vehicle` (`VIN`);
