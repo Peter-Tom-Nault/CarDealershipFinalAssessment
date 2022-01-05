@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public interface ServiceLayer {
 
-    public List<List<VehicleDto>> ReturnFeatureAndSpecial();
+    public List<VehicleDto> ReturnFeatureAndSpecial();
 
     public List<VehicleDto> getNewBasedOnUserEntry(Map<String, String> map);
 

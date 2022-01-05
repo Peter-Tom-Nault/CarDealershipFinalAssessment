@@ -16,7 +16,7 @@ import java.util.Map;
 public class ServiceLayerImpl implements ServiceLayer{
 
     @Override
-    public List<List<VehicleDto>> ReturnFeatureAndSpecial() {
+    public List<VehicleDto> ReturnFeatureAndSpecial() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
