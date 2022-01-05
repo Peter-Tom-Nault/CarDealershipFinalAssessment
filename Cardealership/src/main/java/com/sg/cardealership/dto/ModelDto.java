@@ -17,5 +17,39 @@ public class ModelDto {
     
     private ManufacturerDto manufacturer;
     private List<Special> special;
+	
+    
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getModelName() {
+		return modelName;
+	}
+	public void setModelName(String modelName) {
+		this.modelName = modelName;
+	}
+	public String getTrim() {
+		return trim;
+	}
+	public void setTrim(String trim) {
+		this.trim = trim;
+	}
+	public ManufacturerDto getManufacturer() {
+		return manufacturer;
+	}
+	public void setManufacturer(ManufacturerDto manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+	public List<Special> getSpecial() {
+		return special;
+	}
+	public void setSpecial(List<Special> special) {
+		this.special = special;
+	}
+    
+    
     
 }

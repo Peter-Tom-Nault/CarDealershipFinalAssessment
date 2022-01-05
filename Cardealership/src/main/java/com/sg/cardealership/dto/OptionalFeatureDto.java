@@ -11,5 +11,19 @@ package com.sg.cardealership.dto;
 public class OptionalFeatureDto {
     private int featureId;
     private String name;
+	public int getFeatureId() {
+		return featureId;
+	}
+	public void setFeatureId(int featureId) {
+		this.featureId = featureId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+    
+    
     
 }

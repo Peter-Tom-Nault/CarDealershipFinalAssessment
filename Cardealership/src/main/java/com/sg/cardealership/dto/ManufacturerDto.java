@@ -13,10 +13,13 @@ public class ManufacturerDto {
     private String manufacturerName;
     private String country;
     
-    public ManufacturerDto(String name, String country) {
+    public ManufacturerDto(int id, String name, String country) {
+    	this.id = id;
     	this.manufacturerName = name;
     	this.country = country;
     }
+    
+    
 
 	public String getManufacturerName() {
 		return manufacturerName;
@@ -24,6 +27,30 @@ public class ManufacturerDto {
 
 	public String getCountry() {
 		return country;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public void setManufacturerName(String manufacturerName) {
+		this.manufacturerName = manufacturerName;
+	}
+
+
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
     
     

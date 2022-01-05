@@ -5,7 +5,6 @@ use carDealership;
 
 CREATE TABLE `Vehicle` (
   `VIN` varchar(17) PRIMARY KEY NOT NULL unique,
-  `makeID` mediumint,
   `modelID` int,
   `modelYear` year,
   `exteriorColor` varcharacter(255),
@@ -93,7 +92,6 @@ create table `purchase` (
 `email` varchar(255)
 );
 
-ALTER TABLE `Vehicle` ADD FOREIGN KEY (`makeID`) REFERENCES `manufacturer` (`id`);
 
 ALTER TABLE `Vehicle` ADD FOREIGN KEY (`modelID`) REFERENCES `model` (`id`);
 
