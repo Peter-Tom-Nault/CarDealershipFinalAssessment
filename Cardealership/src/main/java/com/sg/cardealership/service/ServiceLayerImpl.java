@@ -10,11 +10,13 @@ import java.util.Map;
 import com.sg.cardealership.dao.*;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Cna
  */
+@Service
 public class ServiceLayerImpl implements ServiceLayer{
 	
 	AccountTypeDao accountType;
@@ -26,7 +28,10 @@ public class ServiceLayerImpl implements ServiceLayer{
 	SpecialDao specials;
 	UserDao users;
 	VehicleDao vehicles;
-
+    public ServiceLayerImpl()
+    {
+        
+    }
 	/**
 	 * return a list of vehicles that are featured
 	 */
