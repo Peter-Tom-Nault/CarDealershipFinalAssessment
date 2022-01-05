@@ -88,7 +88,7 @@ public class carDealershipController {
     @PostMapping("/Sales/Purchase/{id}")
     public ResponseEntity<purchase> purchase(@PathVariable int vehicleId, @RequestBody purchase purchase)
     {
-    	ResponseEntity.ok(service.purchase(vehicleId, purchase));
+    	return ResponseEntity.ok(service.purchase(vehicleId, purchase));
     }
 	
     //Admin/Vehicles GET
