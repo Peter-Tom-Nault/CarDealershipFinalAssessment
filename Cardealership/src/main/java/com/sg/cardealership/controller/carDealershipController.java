@@ -1,6 +1,8 @@
 package com.sg.cardealership.controller;
 
 import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.ManufacturerDto;
+import com.sg.cardealership.dto.ModelDto;
 import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
@@ -9,6 +11,7 @@ import com.sg.cardealership.service.ServiceLayer;
 import java.util.List;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +45,7 @@ public class carDealershipController {
     
     //inventory/new GET
     //we should recieve jason as map of different objects, and decide what result we should return
-    @GetMapping("inventory/new")
+    @GetMapping("/inventory/new")
     public List<VehicleDto> inventoryNew(@RequestBody Map<String, String> map)
     {
         return service.getNewBasedOnUserEntry(map);
@@ -143,35 +146,75 @@ public class carDealershipController {
 	
     //admin/makes GET
     //retrieve list of makes and return as json list
-    @GetMapping
+    @GetMapping("/admin/makes")
+    public List<ManufacturerDto> adminMakesList() {
+    	return service.adminMakesList();
+    }
     
 	//admin/makes POST
 	//add manufacturer to manufacturer table  (apparently we need to include date added and who added it, remember to add country field to front end)
-	
+	@PostMapping("/admin/makes")
+	public int adminAddMake(@RequestBody ManufacturerDto make) {
+		return service.adminAddMake(make);
+	}
+    
 	//admin/model GET
 	//retrieve list of model jsons (apparently we need to include date added and who added it)
-	
+	@GetMapping("/admin/model")
+	public List<ModelDto> adminModelList(){
+		return service.adminModelList();
+	}
 	//admin/model POST
 	//add new model to model table from fields (apparently we need to include date added and who added it)
+	@PostMapping("/admin/model")
+	public int adminAddModel(@RequestBody ModelDto model) {
+		return service.adminAddModel(model);
+	}
 	
 	//admin/specials GET
-	//retrieve list of alll specials
+	//retrieve list of all specials
+	@GetMapping("/admin/specials")
+	public List<Special> adminGetSpecialsList(){
+		return service.getSpecials();
+	}
 	
 	//admin/specials POST
 	//add new special, (remember to add model to front end)
+	@PostMapping("/admin/specials")
+	public int adminAddSpecial(@RequestBody Special special) {
+		return service.adminAddSpecial(special);
+	}
 	
-        //admin/specials DELETE
+    //admin/specials DELETE
 	//remove selected special from table
-	
-	//reports/index GET
-	//list of system reports (? need to define i think its just links to sales and inventory), only admin allowed otherwise return 403 forbidden
+	@DeleteMapping("/admin/specials/{id}")
+	public int adminDeleteSpecial(@PathVariable int specialId) {
+		return service.adminRemoveSpecial();
+	}
 	
 	//reports/sales GET
 	//admin only otherwise return 403, return sales info for filter. Default all users all dates, filter by user and dates available
-	
+	//this has a different format from everything else, need to decide how to format the returned object
+	@GetMapping("/reports/sales")
+	public int reportSales(@RequestBody Map<String, String> map) {
+		return service.reportSales();
+	}
 	//reports/inventory get
 	//return 2 sets. One new one used. Then group by make model. Provide count and sum of MSRP
+	@GetMapping("/reports/inventory/new")
+	public int reportInventoryNew() {
+		return service.reportInventoryNew();
+	}
+	
+	@GetMapping("/reports/inventory/used")
+	public int reportInventoryUsed() {
+		return service.reportInventoryUsed();
+	}
 	
 	//account/login POST(?) don't know how log in should work?
 	//need to discuss how logging in really works for this and other account specific things
+	@PostMapping("/account/login")
+	public int accountLogin(@RequestBody Map<String, String> map) {
+		return service.accountLogin(map);
+	}
 }
