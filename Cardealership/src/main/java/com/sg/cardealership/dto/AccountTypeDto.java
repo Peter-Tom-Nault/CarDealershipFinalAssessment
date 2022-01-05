@@ -11,6 +11,7 @@ package com.sg.cardealership.dto;
 public class AccountTypeDto {
     private int accountTypeId;
     private String accountType;
+    
 	public int getAccountTypeId() {
 		return accountTypeId;
 	}
