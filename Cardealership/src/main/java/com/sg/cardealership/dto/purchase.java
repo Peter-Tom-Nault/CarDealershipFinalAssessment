@@ -8,17 +8,17 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- *here purchase manage user and vehicle
+ * here purchase manage user and vehicle
  * @author Cna
  */
 public class purchase {
     private UserDto user;
     private VehicleDto vehicle;
-    
     private LocalDate date;
-    BigDecimal price;
-    String custName;
-    String email;
-    Address address;
+    private BigDecimal price;
+    private String custName;
+    private String email;
+    
+    private Address address;
     
 }

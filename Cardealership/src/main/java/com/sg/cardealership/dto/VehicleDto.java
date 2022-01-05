@@ -7,7 +7,7 @@ package com.sg.cardealership.dto;
 import java.util.List;
 
 /**
- *
+ * here vehicle manages manufacture, model and optional
  * @author Cna
  */
 public class VehicleDto {
@@ -25,7 +25,7 @@ public class VehicleDto {
     private boolean purchased;
     private boolean featured;
     
-    private ManufacturerDto manufacture;
+    //private ManufacturerDto manufacture;
     private ModelDto model;
     private List<OptionalFeatureDto> optional;
     

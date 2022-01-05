@@ -9,8 +9,9 @@ package com.sg.cardealership.dto;
  * @author Cna
  */
 public class ManufacturerDto {
-    String manufacturerName;
-    String country;
+    private int id;
+    private String manufacturerName;
+    private String country;
     
     public ManufacturerDto(String name, String country) {
     	this.manufacturerName = name;

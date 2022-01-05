@@ -5,13 +5,14 @@
 package com.sg.cardealership.dto;
 
 /**
- * here user manages accountType
+ *
  * @author Cna
  */
-public class UserDto {
-    private int userId;
-    private String userName;
-    private String password;
-    private AccountTypeDto account;
-    private String email;
+public class ContactInformationDto {
+    String firstName;
+    String lastName;
+    String message;
+    String email;
+    int phone;
+    
 }

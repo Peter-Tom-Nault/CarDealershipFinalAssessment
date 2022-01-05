@@ -9,5 +9,7 @@ package com.sg.cardealership.dto;
  * @author Cna
  */
 public class OptionalFeatureDto {
+    private int featureId;
+    private String name;
     
 }
