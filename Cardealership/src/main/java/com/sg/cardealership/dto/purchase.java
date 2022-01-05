@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class purchase {
     private UserDto user;
     private VehicleDto vehicle;
+    
     private LocalDate date;
     private BigDecimal price;
     private String custName;
