@@ -61,15 +61,9 @@ CREATE TABLE `accountTypes` (
 
 CREATE TABLE `special` (
 `id` int primary key auto_increment,
-`price` decimal(10,2),
 `description` mediumtext
 );
 
-create table `specialModel` (
-`specialId` int,
-`modelId` int,
-primary key(`specialId`, `modelId`)
-);
 
 create table `contactInformation` (
 `firstName` varChar(50),
