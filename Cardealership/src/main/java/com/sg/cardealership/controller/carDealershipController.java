@@ -27,14 +27,16 @@ public class carDealershipController {
     //problem is feature will return vehicle and special return model
     //since vehicle have model object inside it we can use this to return
     //special, so first element of list will be feature and second one special
+    
+    //for now we decided to return just featured vehicle and then in function in js file we use two different calss
     @GetMapping("/index")    
-    public List<List<VehicleDto>> homeIndex()
+    public List<VehicleDto> homeIndex()
     {
         return service.ReturnFeatureAndSpecial();
     }
     
     //inventory/new GET
-    //we should return jason of different objects, and decide what result we should return
+    //we should recieve jason as map of different objects, and decide what result we should return
     @GetMapping("inventory/new")
     public List<VehicleDto> inventoryNew(@RequestBody Map<String, String> map)
     {
@@ -113,7 +115,7 @@ public class carDealershipController {
 	//admin/specials POST
 	//add new special, (remember to add model to front end)
 	
-    //admin/specials DELETE
+        //admin/specials DELETE
 	//remove selected special from table
 	
 	//reports/index GET

@@ -13,11 +13,6 @@ public class ManufacturerDto {
     private String manufacturerName;
     private String country;
     
-    public ManufacturerDto(int id, String name, String country) {
-    	this.id = id;
-    	this.manufacturerName = name;
-    	this.country = country;
-    }
     
     
 
