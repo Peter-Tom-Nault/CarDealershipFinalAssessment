@@ -36,7 +36,7 @@ public class carDealershipController {
     }
     
     //inventory/new GET
-    //we should return jason of different objects, and decide what result we should return
+    //we should recieve jason as map of different objects, and decide what result we should return
     @GetMapping("inventory/new")
     public List<VehicleDto> inventoryNew(@RequestBody Map<String, String> map)
     {
