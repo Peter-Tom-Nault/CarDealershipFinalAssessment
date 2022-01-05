@@ -12,6 +12,5 @@ import com.sg.cardealership.dto.ManufacturerDto;
  */
 public interface ManufacturerDao {
 
-    public ManufacturerDto getManufacturerById(int aInt);
     
 }
