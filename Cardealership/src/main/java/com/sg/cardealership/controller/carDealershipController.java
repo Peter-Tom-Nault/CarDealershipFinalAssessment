@@ -1,14 +1,18 @@
 package com.sg.cardealership.controller;
 
 import com.sg.cardealership.dto.ContactInformationDto;
-import com.sg.cardealership.dto.ModelDto;
 import com.sg.cardealership.dto.Special;
+import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.purchase;
 import com.sg.cardealership.service.ServiceLayer;
 import java.util.List;
 import java.util.Map;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -74,32 +78,72 @@ public class carDealershipController {
     }
     
     
-	//Sales/Purchase/Id POST
-	//create new purchase in purchase for the VIN at Id, must be done by sales account
+    //Sales/Purchase/Id POST
+    //create new purchase in purchase for the VIN at Id, must be done by sales account
+    @PostMapping("/Sales/Purchase/{id}")
+    public void purchase(@PathVariable int vehicleId, @RequestBody purchase purchase)
+    {
+        service.purchase(vehicleId, purchase);
+    }
 	
-	//Admin/Vehicles GET
-	//Needs to return json array of vehicles that are available for purchase based on searchc criteria
+    //Admin/Vehicles GET
+    //Needs to return json array of vehicles that are available for purchase based on searchc criteria
+    @GetMapping("/Admin/Vehicles")
+    public List<VehicleDto> adminSearch(@RequestBody Map<String, String> map)
+    {
+        return service.adminSearch(map);
+    }
+    //Admin/AddVehicle POST
+    //add a new vehicle to the database from the information provided
+    @PostMapping("/Admin/AddVehicle")
+    public int adminAddVehicle(@RequestBody VehicleDto vehicle)
+    {
+        return service.adminAddCar(vehicle);
+    }
 	
-	//Admin/AddVehicle POST
-	//add a new vehicle to the database from the information provided
+    //admin/editVehicle/VIN PUT
+    //edit the indicated vehicle byt replacing fields with information from json
+    @PutMapping("/admin/editVehicle/VIN")
+    public ResponseEntity<VehicleDto> adminUpdateVehicle(@RequestBody VehicleDto vehicle)
+    {
+        return service.adminUpdateVehicle(vehicle);
+    }
+    
+    //admin/users GET
+    //return json array of jsons of users
+    @GetMapping("/admin/users")
+    public List<UserDto> adminUserListRequest()
+    {
+        return service.adminUserListRequest();
+    }
 	
-	//admin/editVehicle/VIN PUT
-	//edit the indicated vehicle byt replacing fields with information from json
+    //admin/addUser POST
+    //add user to user table with data from input fields
+    @PostMapping("/admin/addUser")
+    public int AdminaddUser(@RequestBody UserDto user)
+    {
+        return service.adminAddUser(user);
+    }
+    
+    //admin/editUser PUT
+    //update user with information from fields, only change password if fields are not empty and match
+    @PutMapping("/admin/editUser")
+    public int adminUpdateUser(@RequestBody UserDto user)
+    {
+        return service.adminUpdateUser(user);
+    }
+    
+    //account/changePassword PUT
+    //change the password of the currently logged in user (assuming the fields match)
+    @PutMapping
+    public int accountChangePass(@RequestBody Map<String, String> map)
+    {
+        return service.accountChangePass(map);
+    }
 	
-	//admin/users GET
-	//return json array of jsons of users
-	
-	//admin/addUser POST
-	//add user to user table with data from input fields
-	
-	//admin/editUser PUT
-	//update user with information from fields, only change password if fields are not empty and match
-	
-	//account/changePassword PUT
-	//change the password of the currently logged in user (assuming the fields match)
-	
-	//admin/makes GET
-	//retrieve list of makes and return as json list
+    //admin/makes GET
+    //retrieve list of makes and return as json list
+    @GetMapping
     
 	//admin/makes POST
 	//add manufacturer to manufacturer table  (apparently we need to include date added and who added it, remember to add country field to front end)
