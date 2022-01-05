@@ -6,7 +6,7 @@ use carDealership;
 CREATE TABLE `Vehicle` (
   `VIN` varchar(17) PRIMARY KEY NOT NULL unique,
   `modelID` int,
-  `modelYear` year,
+  `modelYear` int,
   `exteriorColor` varcharacter(255),
   `interiorColor` varcharacter(255),
   `bodytype` varcharacter(255),

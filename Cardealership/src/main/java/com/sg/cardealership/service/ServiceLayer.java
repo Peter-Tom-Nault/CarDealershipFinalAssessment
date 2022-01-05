@@ -5,8 +5,10 @@
 package com.sg.cardealership.service;
 
 import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.InventoryReport;
 import com.sg.cardealership.dto.ManufacturerDto;
 import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.SalesReport;
 import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
@@ -33,7 +35,7 @@ public interface ServiceLayer {
 
     public List<VehicleDto> searchResultForSale(Map<String, String> map);
 
-	public void purchase(int vehicleId, purchase purchase);
+	public purchase purchase(int vehicleId, purchase purchase);
 
 	public List<VehicleDto> adminSearch(Map<String, String> map);
 
@@ -59,13 +61,13 @@ public interface ServiceLayer {
 
 	public int adminAddSpecial(Special special);
 
-	public int adminRemoveSpecial();
+	public int adminRemoveSpecial(int specialId);
 
-	public int reportSales();
+	public List<SalesReport> reportSales();
 
-	public int reportInventoryNew();
+	public List<InventoryReport> reportInventoryNew();
 
-	public int reportInventoryUsed();
+	public List<InventoryReport> reportInventoryUsed();
 
 	public int accountLogin(Map<String, String> map);
 

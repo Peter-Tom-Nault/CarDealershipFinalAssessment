@@ -1,8 +1,10 @@
 package com.sg.cardealership.controller;
 
 import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.InventoryReport;
 import com.sg.cardealership.dto.ManufacturerDto;
 import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.SalesReport;
 import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
@@ -75,18 +77,18 @@ public class carDealershipController {
     //Sales/Index GET
     //search function that only available to sales person
     @GetMapping("/Sales/Index")
-    public List<VehicleDto> saleSearch(@RequestBody Map<String, String> map)
+    public ResponseEntity<List<VehicleDto>> saleSearch(@RequestBody Map<String, String> map)
     {
-        return service.searchResultForSale(map);
+        return ResponseEntity.ok(service.searchResultForSale(map));
     }
     
     
     //Sales/Purchase/Id POST
     //create new purchase in purchase for the VIN at Id, must be done by sales account
     @PostMapping("/Sales/Purchase/{id}")
-    public void purchase(@PathVariable int vehicleId, @RequestBody purchase purchase)
+    public ResponseEntity<purchase> purchase(@PathVariable int vehicleId, @RequestBody purchase purchase)
     {
-        service.purchase(vehicleId, purchase);
+    	ResponseEntity.ok(service.purchase(vehicleId, purchase));
     }
 	
     //Admin/Vehicles GET
@@ -122,6 +124,7 @@ public class carDealershipController {
 	
     //admin/addUser POST
     //add user to user table with data from input fields
+    //since we are getting a user object from the request body we need to confirm that the password is filled and matching on front end
     @PostMapping("/admin/addUser")
     public int AdminaddUser(@RequestBody UserDto user)
     {
@@ -130,6 +133,7 @@ public class carDealershipController {
     
     //admin/editUser PUT
     //update user with information from fields, only change password if fields are not empty and match
+    //since we are getting a user object from the request body we need to confirm that the password is filled and matching on front end
     @PutMapping("/admin/editUser")
     public int adminUpdateUser(@RequestBody UserDto user)
     {
@@ -138,7 +142,7 @@ public class carDealershipController {
     
     //account/changePassword PUT
     //change the password of the currently logged in user (assuming the fields match)
-    @PutMapping
+    @PutMapping("/account/changePassword")
     public int accountChangePass(@RequestBody Map<String, String> map)
     {
         return service.accountChangePass(map);
@@ -189,25 +193,25 @@ public class carDealershipController {
 	//remove selected special from table
 	@DeleteMapping("/admin/specials/{id}")
 	public int adminDeleteSpecial(@PathVariable int specialId) {
-		return service.adminRemoveSpecial();
+		return service.adminRemoveSpecial(specialId);
 	}
 	
 	//reports/sales GET
 	//admin only otherwise return 403, return sales info for filter. Default all users all dates, filter by user and dates available
 	//this has a different format from everything else, need to decide how to format the returned object
 	@GetMapping("/reports/sales")
-	public int reportSales(@RequestBody Map<String, String> map) {
+	public List<SalesReport> reportSales(@RequestBody Map<String, String> map) {
 		return service.reportSales();
 	}
 	//reports/inventory get
 	//return 2 sets. One new one used. Then group by make model. Provide count and sum of MSRP
 	@GetMapping("/reports/inventory/new")
-	public int reportInventoryNew() {
+	public List<InventoryReport> reportInventoryNew() {
 		return service.reportInventoryNew();
 	}
 	
 	@GetMapping("/reports/inventory/used")
-	public int reportInventoryUsed() {
+	public List<InventoryReport> reportInventoryUsed() {
 		return service.reportInventoryUsed();
 	}
 	
