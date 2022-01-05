@@ -21,7 +21,7 @@ public interface ServiceLayer {
 
     public int insertContacts(ContactInformationDto ContactDto);
 
-    public List<VehicleDto> getSpecials();
+    public List<Special> getSpecials();
 
     public List<VehicleDto> searchResultForSale(Map<String, String> map);
     

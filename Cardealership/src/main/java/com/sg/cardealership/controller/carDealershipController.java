@@ -2,6 +2,7 @@ package com.sg.cardealership.controller;
 
 import com.sg.cardealership.dto.ContactInformationDto;
 import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.service.ServiceLayer;
 import java.util.List;
@@ -47,7 +48,7 @@ public class carDealershipController {
     //list of specials
     //since model manage special we should return models that actually have special((reconsider many to many relationship between model and special))
     @GetMapping("/Specials")
-    public List<VehicleDto> getSpecials()
+    public List<Special> getSpecials()
     {
         return service.getSpecials();
     }

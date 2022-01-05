@@ -5,6 +5,7 @@
 package com.sg.cardealership.service;
 
 import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.VehicleDto;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class ServiceLayerImpl implements ServiceLayer{
     }
 
     @Override
-    public List<VehicleDto> getSpecials() {
+    public List<Special> getSpecials() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
