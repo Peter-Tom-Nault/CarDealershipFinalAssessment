@@ -4,10 +4,21 @@
  */
 package com.sg.cardealership.dao;
 
+import com.sg.cardealership.dto.UserDto;
+import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.purchase;
+import java.util.List;
+
 /**
  *
  * @author Cna
  */
 public interface PurchaseDao {
+    public purchase getPurchaseByid(int id);
+    public List<purchase> getAllPurchases();
+    public List<purchase> getpurchasesForUsers(UserDto user);
+    public List<purchase> getpurchasesForVehicle(VehicleDto vehicle);
+    public purchase addPurchase(purchase pu);
+    public void updatePurchase(purchase pu);
     
 }
