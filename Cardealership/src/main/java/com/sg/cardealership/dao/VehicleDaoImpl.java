@@ -41,7 +41,7 @@ public class VehicleDaoImpl implements VehicleDao{
             vehicle.setInteriorColor(rs.getString("interiorColor"));
             vehicle.setBodyType(rs.getString("bodyType"));
             vehicle.setTransmission(rs.getString("transmission"));
-            vehicle.setMsrp(rs.getString("msrp"));
+            vehicle.setMsrp(rs.getBigDecimal("msrp"));
             vehicle.setSalePrice(rs.getString("salePrice"));
             vehicle.setPhoto(rs.getString("photo"));
             vehicle.setMileage(rs.getInt("mileage"));
