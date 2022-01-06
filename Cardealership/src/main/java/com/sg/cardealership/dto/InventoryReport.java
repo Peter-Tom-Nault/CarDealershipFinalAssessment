@@ -1,6 +1,7 @@
 package com.sg.cardealership.dto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class InventoryReport {
 	
@@ -10,6 +11,17 @@ public class InventoryReport {
 	private int count;
 	private BigDecimal stockValue;
 	
+	public InventoryReport(List<VehicleDto> vehicleList) {
+		year = vehicleList.get(0).getYear();
+		make = vehicleList.get(0).getModel().getManufacturer().getManufacturerName();
+		model = vehicleList.get(0).getModel().getModelName();
+		count = 0;
+		stockValue = new BigDecimal("0.00");
+		for(VehicleDto v: vehicleList) {
+			count++;
+			stockValue.add(new BigDecimal(v.getMsrp()));
+		}
+	}
 	public int getYear() {
 		return year;
 	}

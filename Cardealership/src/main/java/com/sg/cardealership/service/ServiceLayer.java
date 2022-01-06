@@ -41,7 +41,7 @@ public interface ServiceLayer {
 
 	public int adminAddCar(VehicleDto vehicle);
 
-	public ResponseEntity<VehicleDto> adminUpdateVehicle(VehicleDto vehicle);
+	public VehicleDto adminUpdateVehicle(VehicleDto vehicle);
 
 	public List<UserDto> adminUserListRequest();
 

@@ -5,8 +5,12 @@
 package com.sg.cardealership.service;
 
 import com.sg.cardealership.dto.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.sg.cardealership.dao.*;
 
 import org.springframework.http.ResponseEntity;
@@ -40,7 +44,7 @@ public class ServiceLayerImpl implements ServiceLayer{
 	 */
     @Override
     public List<VehicleDto> ReturnFeatureAndSpecial() {
-    	vehicles.getFeaturedVehicles();
+    	return vehicles.getFeaturedVehicles();
     }
 
     /**
@@ -48,7 +52,7 @@ public class ServiceLayerImpl implements ServiceLayer{
      */
     @Override
     public List<VehicleDto> getNewBasedOnUserEntry(Map<String, String> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	return vehicles.getNewBasedOnUserEntry(map);
     }
 
     @Override
@@ -80,10 +84,11 @@ public class ServiceLayerImpl implements ServiceLayer{
 	@Override
 	public int adminAddCar(VehicleDto vehicle) {
 		vehicles.addVehicle(vehicle);
+		return 0;
 	}
 
 	@Override
-	public ResponseEntity<VehicleDto> adminUpdateVehicle(VehicleDto vehicle) {
+	public VehicleDto adminUpdateVehicle(VehicleDto vehicle) {
 		return vehicles.updateVehicle(vehicle);
 	}
 
@@ -101,9 +106,6 @@ public class ServiceLayerImpl implements ServiceLayer{
 	@Override
 	public int adminUpdateUser(UserDto user) {
 		
-
-		if(user.getPassword()user == null) {
-
 		if(user.getPassword() == null) {
 
 			users.updateUser(user, false);
@@ -148,7 +150,7 @@ public class ServiceLayerImpl implements ServiceLayer{
 
 	@Override
 	public int adminAddSpecial(Special special) {
-		specials.addSpecial(special)
+		specials.addSpecial(special);
 		return 0;
 	}
 
@@ -160,17 +162,37 @@ public class ServiceLayerImpl implements ServiceLayer{
 
 	@Override
 	public List<SalesReport> reportSales() {
-		return purchases.getSalesRecord();
+		List<purchase> salesHistory = purchases.getAllPurchases();
+		Map<UserDto, List<purchase>> purchasesByUser = salesHistory.stream().collect(Collectors.groupingBy(purchase::getUser));
+		List<SalesReport> sales = new ArrayList<>();
+		for(List<purchase> userPurchases: purchasesByUser.values()) {
+			
+				sales.add(new SalesReport(userPurchases));
+			
+		}
+		return sales;
 	}
 
 	@Override
 	public List<InventoryReport> reportInventoryNew() {
-		return vehicles.getNewInventoryReport();
+		List<VehicleDto> newVehicles = vehicles.getNewVehicles();
+		Map<ModelDto, List<VehicleDto>> vehiclesByModel = newVehicles.stream().collect(Collectors.groupingBy(VehicleDto::getModel));
+		List<InventoryReport> invReport = new ArrayList<>();
+		for(List<VehicleDto> vehicleList: vehiclesByModel.values()) {
+			invReport.add(new InventoryReport(vehicleList));
+		}
+		return invReport;
 	}
 
 	@Override
 	public List<InventoryReport> reportInventoryUsed() {
-		return vehicles.getUsedInventoryReport();
+		List<VehicleDto> usedVehicles =  vehicles.getUsedVehicles();
+		Map<ModelDto, List<VehicleDto>> vehiclesByModel = usedVehicles.stream().collect(Collectors.groupingBy(VehicleDto::getModel));
+		List<InventoryReport> invReport = new ArrayList<>();
+		for(List<VehicleDto> vehicleList: vehiclesByModel.values()) {
+			invReport.add(new InventoryReport(vehicleList));
+		}
+		return invReport;
 	}
 
 	//Login questions, need to decide how to do logins
