@@ -66,6 +66,7 @@ CREATE TABLE `special` (
 
 
 create table `contactInformation` (
+`id` int primary key auto_increment,
 `firstName` varChar(50),
 `lastName` varChar(50),
 `message` mediumtext,
@@ -74,6 +75,7 @@ create table `contactInformation` (
 );
 
 create table `purchase` (
+`id` int primary key auto_increment,
 `VIN` varchar(17),
 `salespersonId` int, 
 `date` date,

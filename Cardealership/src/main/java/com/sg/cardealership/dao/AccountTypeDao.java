@@ -4,10 +4,14 @@
  */
 package com.sg.cardealership.dao;
 
+import com.sg.cardealership.dto.AccountTypeDto;
+import java.util.List;
+
 /**
  *
  * @author Cna
  */
 public interface AccountTypeDao {
-    
+    public List<AccountTypeDto> getAllAccountType();
+    public AccountTypeDto getAccountTypeById(int id);
 }
