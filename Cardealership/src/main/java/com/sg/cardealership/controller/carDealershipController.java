@@ -53,6 +53,11 @@ public class carDealershipController {
         return service.getNewBasedOnUserEntry(map);
     }
     
+    @GetMapping("/inventory/used")
+    public List<VehicleDto> inventoryUsed(@RequestBody Map<String, String> map){
+    	return service.getUsedBasedOnUserEntry(map);
+    }
+    
     //Home/Specials GET
     //list of specials
     //since model manage special we should return models that actually have special((reconsider many to many relationship between model and special))
@@ -88,7 +93,7 @@ public class carDealershipController {
     @PostMapping("/Sales/Purchase/{id}")
     public ResponseEntity<purchase> purchase(@PathVariable int vehicleId, @RequestBody purchase purchase)
     {
-    	return ResponseEntity.ok(service.purchase(vehicleId, purchase));
+    	return ResponseEntity.ok(service.purchase(purchase));
     }
 	
     //Admin/Vehicles GET
@@ -96,7 +101,7 @@ public class carDealershipController {
     @GetMapping("/Admin/Vehicles")
     public List<VehicleDto> adminSearch(@RequestBody Map<String, String> map)
     {
-        return service.adminSearch(map);
+        return service.searchResultForSale(map);
     }
     //Admin/AddVehicle POST
     //add a new vehicle to the database from the information provided
@@ -109,9 +114,9 @@ public class carDealershipController {
     //admin/editVehicle/VIN PUT
     //edit the indicated vehicle byt replacing fields with information from json
     @PutMapping("/admin/editVehicle/VIN")
-    public ResponseEntity<VehicleDto> adminUpdateVehicle(@RequestBody VehicleDto vehicle)
+    public void adminUpdateVehicle(@RequestBody VehicleDto vehicle)
     {
-        return service.adminUpdateVehicle(vehicle);
+        service.adminUpdateVehicle(vehicle);
     }
     
     //admin/users GET

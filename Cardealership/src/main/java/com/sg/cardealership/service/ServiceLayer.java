@@ -41,7 +41,7 @@ public interface ServiceLayer {
 
 	public int adminAddCar(VehicleDto vehicle);
 
-	public VehicleDto adminUpdateVehicle(VehicleDto vehicle);
+	public void adminUpdateVehicle(VehicleDto vehicle);
 
 	public List<UserDto> adminUserListRequest();
 
@@ -70,6 +70,8 @@ public interface ServiceLayer {
 	public List<InventoryReport> reportInventoryUsed();
 
 	public int accountLogin(Map<String, String> map);
+
+	public List<VehicleDto> getUsedBasedOnUserEntry(Map<String, String> map);
 
     
 }

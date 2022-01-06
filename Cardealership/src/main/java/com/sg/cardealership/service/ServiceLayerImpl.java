@@ -6,6 +6,7 @@ package com.sg.cardealership.service;
 
 import com.sg.cardealership.dto.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class ServiceLayerImpl implements ServiceLayer{
 	 */
     @Override
     public List<VehicleDto> ReturnFeatureAndSpecial() {
-    	List<VehicleDto> allvehicles = new ArrayList<>();
+    	List<VehicleDto> allvehicles = vehicles.getAllVehicle();
     	List<VehicleDto> featuredVehicles = allvehicles.stream().filter((v) -> v.isFeatured()).collect(Collectors.toList());
     	return featuredVehicles;
     }
@@ -54,8 +55,15 @@ public class ServiceLayerImpl implements ServiceLayer{
      */
     @Override
     public List<VehicleDto> getNewBasedOnUserEntry(Map<String, String> map) {
-    	return vehicles.getNewBasedOnUserEntry(map);
+    	List<VehicleDto> filtered = searchVehiclesByConditions(map);
+    	return filtered.stream().filter((v) -> v.getMileage()<=1000).collect(Collectors.toList());
     }
+    
+    @Override
+	public List<VehicleDto> getUsedBasedOnUserEntry(Map<String, String> map) {
+    	List<VehicleDto> filtered = searchVehiclesByConditions(map);
+    	return filtered.stream().filter((v) -> v.getMileage()>1000).collect(Collectors.toList());
+	}
 
     @Override
     public int insertContacts(ContactInformationDto ContactDto) {
@@ -73,8 +81,9 @@ public class ServiceLayerImpl implements ServiceLayer{
 
     @Override
     public List<VehicleDto> searchResultForSale(Map<String, String> map) {
-        List<VehicleDto> allVehicles = vehicles.getAllVehicles();
-        return null;
+        List<VehicleDto> allVehicles = vehicles.getAllVehicle();
+        List<String> allPurchasedVehicles = purchases.getAllPurchases().stream().map((p) -> p.getVehicle().getVin()).collect(Collectors.toList());
+        return allVehicles.stream().filter((v) -> !allPurchasedVehicles.contains(v.getVin())).collect(Collectors.toList());
     }
 
 	@Override
@@ -82,12 +91,15 @@ public class ServiceLayerImpl implements ServiceLayer{
 		return purchases.addPurchase(purchase);
 	}
 
+	
+	//I think this is not needed, search behaves identically to sales search
 	@Override
 	public List<VehicleDto> adminSearch(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 	@Override
 	public int adminAddCar(VehicleDto vehicle) {
 		vehicles.addVehicle(vehicle);
@@ -95,8 +107,8 @@ public class ServiceLayerImpl implements ServiceLayer{
 	}
 
 	@Override
-	public VehicleDto adminUpdateVehicle(VehicleDto vehicle) {
-		return vehicles.updateVehicle(vehicle);
+	public void adminUpdateVehicle(VehicleDto vehicle) {
+		vehicles.updateVehicle(vehicle);
 	}
 
 	@Override
@@ -183,7 +195,7 @@ public class ServiceLayerImpl implements ServiceLayer{
 
 	@Override
 	public List<InventoryReport> reportInventoryNew() {
-		List<VehicleDto> newVehicles = vehicles.getNewVehicles();
+		List<VehicleDto> newVehicles = vehicles.getAllVehicle().stream().filter((v) -> v.getMileage()<1000).collect(Collectors.toList());
 		Map<ModelDto, List<VehicleDto>> vehiclesByModel = newVehicles.stream().collect(Collectors.groupingBy(VehicleDto::getModel));
 		List<InventoryReport> invReport = new ArrayList<>();
 		for(List<VehicleDto> vehicleList: vehiclesByModel.values()) {
@@ -194,7 +206,7 @@ public class ServiceLayerImpl implements ServiceLayer{
 
 	@Override
 	public List<InventoryReport> reportInventoryUsed() {
-		List<VehicleDto> usedVehicles =  vehicles.getUsedVehicles();
+		List<VehicleDto> usedVehicles =  vehicles.getAllVehicle().stream().filter((v) -> v.getMileage()>=1000).collect(Collectors.toList());
 		Map<ModelDto, List<VehicleDto>> vehiclesByModel = usedVehicles.stream().collect(Collectors.groupingBy(VehicleDto::getModel));
 		List<InventoryReport> invReport = new ArrayList<>();
 		for(List<VehicleDto> vehicleList: vehiclesByModel.values()) {
@@ -214,12 +226,14 @@ public class ServiceLayerImpl implements ServiceLayer{
 	}
 	
 	private List<VehicleDto> searchVehiclesByConditions(Map<String, String> cond){
-		List<VehicleDto> all = new ArrayList<>();
+		List<VehicleDto> all = vehicles.getAllVehicle();
 		String yearMakeModel =  cond.get("yearMakeModel");
 		all = all.stream().filter((v) -> (v.getYear() + " " + v.getModel().getModelName() + " " + v.getModel().getManufacturer().getManufacturerName()).contains(yearMakeModel)).collect(Collectors.toList());
 		all = all.stream().filter((v) -> v.getYear() > Integer.parseInt(cond.get("minYear")) && v.getYear() < Integer.parseInt(cond.get("maxYear"))).collect(Collectors.toList());
-		all = all.stream().filter((v) -> v.getMsrp().compareTo(yearMakeModel)
+		all = all.stream().filter((v) -> (v.getMsrp().compareTo(new BigDecimal(cond.get("minPrice"))) >= 0) && v.getMsrp().compareTo(new BigDecimal(cond.get("maxPrice"))) <=0 ).collect(Collectors.toList());
 		return all;
 	}
+
+	
     
 }
