@@ -12,15 +12,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Cna
  */
+@Repository
 public class AccountTypeDaoImpl implements AccountTypeDao{
-    @Autowired
+    
     JdbcTemplate jdbc;
+    
+    @Autowired
+    public AccountTypeDaoImpl(JdbcTemplate jdbc)
+    {
+        this.jdbc = jdbc;
+    }
     
     public static final class AccountTypeMapper implements RowMapper<AccountTypeDto> {
 

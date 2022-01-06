@@ -4,7 +4,6 @@
  */
 package com.sg.cardealership.dao;
 
-import com.sg.cardealership.dto.ContactInformationDto;
 import com.sg.cardealership.dto.ManufacturerDto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,17 +12,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Cna
  */
+@Repository
 public class ManufacturerDaoImpl implements ManufacturerDao{
-    @Autowired
-    JdbcTemplate jdbc;
-
     
+    JdbcTemplate jdbc;
+    
+    @Autowired
+    public ManufacturerDaoImpl(JdbcTemplate jdbc)
+    {
+        this.jdbc = jdbc;
+    }
     public static final class ManufacturerMapper implements RowMapper<ManufacturerDto> {
 
         @Override

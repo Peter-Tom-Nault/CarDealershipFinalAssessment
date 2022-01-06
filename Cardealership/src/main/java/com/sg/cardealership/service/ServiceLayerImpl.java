@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.sg.cardealership.dao.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,20 @@ public class ServiceLayerImpl implements ServiceLayer{
 	SpecialDao specials;
 	UserDao users;
 	VehicleDao vehicles;
-    public ServiceLayerImpl()
-    {
         
+    @Autowired
+    public ServiceLayerImpl(AccountTypeDao accountType, ContactInformationDao contactInfo, ManufacturerDao manufacturers,
+    ModelDao models, OptionalFeatureDao optFeatures, PurchaseDao purchases, SpecialDao specials, UserDao users, VehicleDao vehicles)
+    {
+        this.accountType = accountType;
+        this.contactInfo = contactInfo;
+        this.manufacturers = manufacturers;
+        this.models = models;
+        this.optFeatures = optFeatures;
+        this.purchases = purchases;
+        this.specials = specials;
+        this.users = users;
+        this.vehicles = vehicles;
     }
 
 	/**

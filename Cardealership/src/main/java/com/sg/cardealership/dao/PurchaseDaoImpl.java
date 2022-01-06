@@ -7,7 +7,6 @@ package com.sg.cardealership.dao;
 import com.sg.cardealership.dao.UserDaoImpl.UserDaoMapper;
 import com.sg.cardealership.dao.VehicleDaoImpl.VehicleMapper;
 import com.sg.cardealership.dto.Address;
-import com.sg.cardealership.dto.OptionalFeatureDto;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
@@ -19,16 +18,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Cna
  */
+@Repository
 public class PurchaseDaoImpl implements PurchaseDao{
     
+    JdbcTemplate jdbc; 
+    
     @Autowired
-    JdbcTemplate jdbc;    
+    public PurchaseDaoImpl(JdbcTemplate jdbc)
+    {
+        this.jdbc = jdbc;
+    }
     
     public static final class PurchaseMapper implements RowMapper<purchase> {
 
