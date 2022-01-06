@@ -4,7 +4,6 @@
  */
 package com.sg.cardealership.dao;
 
-import com.sg.cardealership.dto.AccountTypeDto;
 import com.sg.cardealership.dto.ContactInformationDto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,54 +36,56 @@ public class ContactInformationDaoImpl implements ContactInformationDao{
             return Contact;
         }
     }    
-}
+
     @Override
-        public List<ContactInformation> getAllInformations() {
-            final String SELECT_ALL_CONTACTINFORMATIONS = "SELECT * FROM employee";
-            return jdbc.query(SELECT_ALL_EMPLOYEES, new EmployeeMapper());
-        }
-
-        @Override
-        public ContactInformation getEmployeeById(int id) {
-            try {
-                final String SELECT_EMPLOYEE_BY_ID = "SELECT * FROM employee WHERE id = ?";
-                return jdbc.queryForObject(SELECT_EMPLOYEE_BY_ID, new EmployeeMapper(), id);
-            } catch(DataAccessException ex) {
-                return null;
-            }
-        }
-
-        @Override
-        @Transactional
-        public ContactInformation addEmployee(ContactInformation employee) {
-            final String INSERT_EMPLOYEE = "INSERT INTO employee(firstName, lastName) "
-                    + "VALUES(?,?)";
-            jdbc.update(INSERT_EMPLOYEE, 
-                    employee.getFirstName(),
-                    employee.getLastName());
-            int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-            employee.setId(newId);
-            return employee;
-        }
-
-        @Override
-        public void updateEmployee(ContactInformation employee) {
-            final String UPDATE_EMPLOYEE = "UPDATE employee SET firstName = ?, lastName = ? "
-                    + "WHERE id = ?";
-            jdbc.update(UPDATE_EMPLOYEE,
-                    employee.getFirstName(),
-                    employee.getLastName(),
-                    employee.getId());
-        }
-
-        @Override
-        @Transactional
-        public void deleteEmployeeById(int id) {
-            final String DELETE_MEETING_EMPLOYEE = "DELETE FROM meeting_employee "
-                    + "WHERE employeeId = ?";
-            jdbc.update(DELETE_MEETING_EMPLOYEE, id);
-
-            final String DELETE_EMPLOYEE = "DELETE FROM employee WHERE id = ?";
-            jdbc.update(DELETE_EMPLOYEE, id);
-        }      
+    public List<ContactInformationDto> getAllContactInformations() {
+        final String SELECT_ALL_CONTACTINFORMATIONS = "SELECT * FROM contactInformation";
+        return jdbc.query(SELECT_ALL_CONTACTINFORMATIONS, new ContactInformationMapper());
     }
+
+    @Override
+    public ContactInformationDto getContactInfoById(int id) {
+        try {
+            final String SELECT_CONTACTINFORMATION_BY_ID = "SELECT * FROM contactInformation WHERE id = ?";
+            return jdbc.queryForObject(SELECT_CONTACTINFORMATION_BY_ID, new ContactInformationMapper(), id);
+        } catch(DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public ContactInformationDto addContactInfo(ContactInformationDto contact) {
+        final String INSERT_CONTACTINFORmaTION = "INSERT INTO contactInformation(firstName, lastName, message, email, phone) "
+                + "VALUES(?,?,?,?,?)";
+        jdbc.update(INSERT_CONTACTINFORmaTION, 
+                contact.getFirstName(),
+                contact.getLastName(),
+                contact.getMessage(),
+                contact.getEmail(),
+                contact.getPhone());
+        int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        contact.setId(newId);
+        return contact;
+    }
+
+    @Override
+    public void updateContact(ContactInformationDto contact) {
+        final String UPDATE_CONTACTINFORMATION = "UPDATE contactInformation SET firstName = ?, lastName = ?, message = ?, email = ?, phone = ? "
+                + "WHERE id = ?";
+        jdbc.update(UPDATE_CONTACTINFORMATION,
+                contact.getFirstName(),
+                contact.getLastName(),
+                contact.getMessage(),
+                contact.getEmail(),
+                contact.getPhone(),
+                contact.getId());
+    }
+
+    @Override
+    public void deleteContactById(int id) {
+
+        final String DELETE_CONTACT = "DELETE FROM contactInformation WHERE id = ?";
+        jdbc.update(DELETE_CONTACT, id);
+    }      
+}
