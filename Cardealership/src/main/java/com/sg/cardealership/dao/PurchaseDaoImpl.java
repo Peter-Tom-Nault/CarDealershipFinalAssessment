@@ -95,7 +95,7 @@ public class PurchaseDaoImpl implements PurchaseDao{
     }
     
     @Override
-    public List<purchase> getpurchasesForUsers(UserDto user) {
+    public List<purchase> getpurchasesForUser(UserDto user) {
         final String SELECT_PURCHASES_FOR_USERS = "SELECT * FROM purchase WHERE salesPersonId = ?";
         List<purchase> purchases = jdbc.query(SELECT_PURCHASES_FOR_USERS, 
                 new PurchaseMapper(), user.getUserId());

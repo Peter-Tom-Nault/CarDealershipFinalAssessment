@@ -4,10 +4,19 @@
  */
 package com.sg.cardealership.dao;
 
+import com.sg.cardealership.dto.AccountTypeDto;
+import com.sg.cardealership.dto.UserDto;
+import java.util.List;
+
 /**
  *
  * @author Cna
  */
 public interface UserDao{
+    public UserDto getUserByid(int id);
+    public List<UserDto> getAllUsers();
+    public List<UserDto> getUsersForAccountType(AccountTypeDto account);
+    public UserDto addUser(UserDto user);
+    public void updateUser(UserDto user);
     
 }

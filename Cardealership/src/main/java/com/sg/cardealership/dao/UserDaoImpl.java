@@ -9,11 +9,13 @@ import com.sg.cardealership.dto.AccountTypeDto;
 import com.sg.cardealership.dto.UserDto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -57,54 +59,57 @@ public class UserDaoImpl implements UserDao{
     }
     
     @Override
-    public List<ModelDto> getAllModels() {
-        final String SELECT_ALL_MODELS = "SELECT * FROM model";
-        List<ModelDto> models = jdbc.query(SELECT_ALL_MODELS, new ModelDaoMapper());
+    public List<UserDto> getAllUsers() {
+        final String SELECT_ALL_USERS = "SELECT * FROM user";
+        List<UserDto> users = jdbc.query(SELECT_ALL_USERS, new UserDaoMapper());
         
-        addManufacturerToModels(models);
+        addAccountTypeToUsers(users);
         
-        return models;
+        return users;
     }
-    private void addManufacturerToModels(List<ModelDto> models) {
-        for(ModelDto model : models) {
-            model.setManufacturer(getModelForManufacturer(model));
+    
+    private void addAccountTypeToUsers(List<UserDto> users) {
+        for(UserDto user : users) {
+            user.setAccount(getAccountTypeForUser(user));
         }
     }
     
     @Override
-    public List<ModelDto> getModelsForManufacturer(ManufacturerDto man) {
-        final String SELECT_MODELS_FOR_MANUFACTURER = "SELECT * FROM model WHERE make = ?";
-        List<ModelDto> models = jdbc.query(SELECT_MODELS_FOR_MANUFACTURER, 
-                new ModelDaoMapper(), man.getId());
+    public List<UserDto> getUsersForAccountType(AccountTypeDto account) {
+        final String SELECT_USERS_FOR_ACCOUNTTYPE = "SELECT * FROM user WHERE accountType = ?";
+        List<UserDto> users = jdbc.query(SELECT_USERS_FOR_ACCOUNTTYPE, 
+                new UserDaoMapper(), account.getAccountTypeId());
         
-        addManufacturerToModels(models);
+        addAccountTypeToUsers(users);
         
-        return models;
+        return users;
     }
     
     @Override
     @Transactional
-    public ModelDto addModel(ModelDto model) {
-        final String INSERT_MODEL = "INSERT INTO model(modelName, trim, make) VALUES(?,?,?)";
-        jdbc.update(INSERT_MODEL,
-                model.getModelName(),
-                model.getTrim(),
-                model.getManufacturer().getId());
+    public UserDto addUser(UserDto user) {
+        final String INSERT_USER = "INSERT INTO user(username, accountType, passowrd, email) VALUES(?,?,?,?)";
+        jdbc.update(INSERT_USER,
+                user.getUserName(),
+                user.getAccount().getAccountTypeId(),
+                user.getPassword(),
+                user.getEmail());
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        model.setId(newId);
+        user.setUserId(newId);
         
-        return model;
+        return user;
     }
 
     @Override
-    public void updateModel(ModelDto model) {
-        final String UPDATE_MODEL = "UPDATE model "
-                + "SET modelName = ?, trim = ?, make = ? WHERE id = ?";
-        jdbc.update(UPDATE_MODEL,
-                model.getModelName(),
-                model.getTrim(),
-                model.getManufacturer().getId(),
-                model.getId());
+    public void updateUser(UserDto user) {
+        final String UPDATE_USER = "UPDATE user "
+                + "SET username = ? accountType = ? passowrd = ? email = ? WHERE id = ?";
+        jdbc.update(UPDATE_USER,
+                user.getUserName(),
+                user.getAccount().getAccountTypeId(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getUserId());
     }
     
 }
