@@ -16,7 +16,7 @@ import java.util.List;
 public interface PurchaseDao {
     public purchase getPurchaseByid(int id);
     public List<purchase> getAllPurchases();
-    public List<purchase> getpurchasesForUsers(UserDto user);
+    public List<purchase> getpurchasesForUser(UserDto user);
     public List<purchase> getpurchasesForVehicle(VehicleDto vehicle);
     public purchase addPurchase(purchase pu);
     public void updatePurchase(purchase pu);
