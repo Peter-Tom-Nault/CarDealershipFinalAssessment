@@ -11,6 +11,7 @@ import com.sg.cardealership.dto.OptionalFeatureDto;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -105,38 +107,51 @@ public class PurchaseDaoImpl implements PurchaseDao{
     
     @Override
     public List<purchase> getpurchasesForVehicle(VehicleDto vehicle) {
-        final String SELECT_MODELS_FOR_MANUFACTURER = "SELECT * FROM model WHERE make = ?";
-        List<ModelDto> models = jdbc.query(SELECT_MODELS_FOR_MANUFACTURER, 
-                new ModelDaoMapper(), man.getId());
+        final String SELECT_PURCHASES_FOR_VEHICLE = "SELECT * FROM purchase WHERE VIN = ?";
+        List<purchase> purchases = jdbc.query(SELECT_PURCHASES_FOR_VEHICLE, 
+                new PurchaseMapper(), vehicle.getVin());
         
-        addManufacturerToModels(models);
+        addUserAndVehicleToPurchases(purchases);
         
-        return models;
+        return purchases;
     }
     
     @Override
     @Transactional
-    public ModelDto addModel(ModelDto model) {
-        final String INSERT_MODEL = "INSERT INTO model(modelName, trim, make) VALUES(?,?,?)";
-        jdbc.update(INSERT_MODEL,
-                model.getModelName(),
-                model.getTrim(),
-                model.getManufacturer().getId());
+    public purchase addPurchase(purchase pu) {
+        final String INSERT_PURCHASE = "INSERT INTO purchase(VIN, salesPersonId, date, purchasePrice, customerName, streetAddress, city, state, zip, email) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        jdbc.update(INSERT_PURCHASE,
+                pu.getVehicle().getVin(),
+                pu.getUser().getUserId(),
+                Date.valueOf(pu.getDate()),
+                pu.getPrice(),
+                pu.getCustName(),
+                pu.getAddress().getStreet(),
+                pu.getAddress().getCity(),
+                pu.getAddress().getState(),
+                pu.getAddress().getZip(),
+                pu.getEmail());
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        model.setId(newId);
+        pu.setId(newId);
         
-        return model;
+        return pu;
     }
 
     @Override
-    public void updateModel(ModelDto model) {
-        final String UPDATE_MODEL = "UPDATE model "
-                + "SET modelName = ?, trim = ?, make = ? WHERE id = ?";
-        jdbc.update(UPDATE_MODEL,
-                model.getModelName(),
-                model.getTrim(),
-                model.getManufacturer().getId(),
-                model.getId());
+    public void updatePurchase(purchase pu) {
+        final String UPDATE_PURCHASE = "UPDATE purchase "
+                + "SET VIN = ? salesPersonId = ? date = ? purchasePrice = ? customerName = ? streetAddress = ? city = ? state = ? zip = ? email = ? WHERE id = ?";
+        jdbc.update(UPDATE_PURCHASE,
+                pu.getVehicle().getVin(),
+                pu.getUser().getUserId(),
+                Date.valueOf(pu.getDate()),
+                pu.getPrice(),
+                pu.getCustName(),
+                pu.getAddress().getStreet(),
+                pu.getAddress().getCity(),
+                pu.getAddress().getState(),
+                pu.getAddress().getZip(),
+                pu.getEmail());
     }
 
 }
