@@ -108,12 +108,6 @@ public class ModelDaoImpl implements ModelDao{
                 model.getId());
     }
     
-    @Override
-    public void deleteModelById(int id) {
-        
-        final String DELETE_MODEL = "DELETE FROM model WHERE id = ?";
-        jdbc.update(DELETE_MODEL, id);
-    }
 }
 
     

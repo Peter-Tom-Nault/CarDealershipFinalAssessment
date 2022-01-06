@@ -4,10 +4,16 @@
  */
 package com.sg.cardealership.dao;
 
+import com.sg.cardealership.dto.OptionalFeatureDto;
+import java.util.List;
+
 /**
  *
  * @author Cna
  */
 public interface OptionalFeatureDao {
-    
+    public List<OptionalFeatureDto> getAllOptionalFeatures();
+    public OptionalFeatureDto getOptionalFeatureById(int id);
+    public OptionalFeatureDto addOptionalFeature(OptionalFeatureDto option);
+    public void updateOptionalFeature(OptionalFeatureDto option);
 }
