@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.sg.cardealership.dto.InventoryReport;
+import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
 import com.sg.cardealership.dto.VehicleDto;
 
 /**
@@ -16,16 +18,31 @@ import com.sg.cardealership.dto.VehicleDto;
  */
 public interface VehicleDao {
 
-	List<VehicleDto> getFeaturedVehicles();
-
-	List<VehicleDto> getNewBasedOnUserEntry(Map<String, String> map);
-
-	void addVehicle(VehicleDto vehicle);
-
-	VehicleDto updateVehicle(VehicleDto vehicle);
-
-	List<VehicleDto> getNewVehicles();
-
-	List<VehicleDto> getUsedVehicles();
+//	List<VehicleDto> getFeaturedVehicles();
+//
+//	List<VehicleDto> getNewBasedOnUserEntry(Map<String, String> map);
+//
+//	void addVehicle(VehicleDto vehicle);
+//
+//	VehicleDto updateVehicle(VehicleDto vehicle);
+//
+//	List<VehicleDto> getNewVehicles();
+//
+//	List<VehicleDto> getUsedVehicles();
+    
+    public VehicleDto getVehicleByid(int id);
+    
+    public List<VehicleDto> getAllVehicle();
+    
+    public List<VehicleDto> getVehiclesForModel(ModelDto model);
+    
+    public List<VehicleDto> getVehiclesForOption(OptionalFeatureDto option);
+    
+    public VehicleDto addVehicle(VehicleDto vehicle);
+    
+    public void updateVehicle(VehicleDto vehicle);
+    
+    public void deleteVehicleById(int id);
+    
     
 }

@@ -66,7 +66,7 @@ public class PurchaseDaoImpl implements PurchaseDao{
     
     private UserDto getUserForPurchase(purchase pu) {
         final String SELECT_USER_FOR_PURCHASE = "SELECT u.* FROM user u "
-                + "JOIN purchase pu ON u.userId = pu.salesPersonId WHERE pu.salesPersonId = ?";
+                + "JOIN purchase pu ON u.userId = pu.salesPersonId WHERE pu.Id = ?";
         return jdbc.queryForObject(SELECT_USER_FOR_PURCHASE, new UserDaoMapper(), 
                 pu.getId());
     }
