@@ -14,4 +14,6 @@ import java.util.List;
 public interface AccountTypeDao {
     public List<AccountTypeDto> getAllAccountType();
     public AccountTypeDto getAccountTypeById(int id);
+    public AccountTypeDto addAccountType(AccountTypeDto AccountType);
+    public void updateAccountType(AccountTypeDto account);
 }

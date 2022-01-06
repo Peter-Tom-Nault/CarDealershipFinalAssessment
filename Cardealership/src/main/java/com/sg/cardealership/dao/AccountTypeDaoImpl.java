@@ -52,35 +52,22 @@ public class AccountTypeDaoImpl implements AccountTypeDao{
     @Override
     @Transactional
     public AccountTypeDto addAccountType(AccountTypeDto AccountType) {
-        final String INSERT_ACCOUNTTYPE = "INSERT INTO employee(firstName, lastName) "
-                + "VALUES(?,?)";
-        jdbc.update(INSERT_EMPLOYEE, 
-                employee.getFirstName(),
-                employee.getLastName());
+        final String INSERT_ACCOUNTTYPE = "INSERT INTO Accounttypes(accountType) "
+                + "VALUES(?)";
+        jdbc.update(INSERT_ACCOUNTTYPE,
+                AccountType.getAccountType());
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        employee.setId(newId);
-        return employee;
+        AccountType.setAccountTypeId(newId);
+        return AccountType;
     }
 
     @Override
-    public void updateEmployee(AccountTypeDto employee) {
-        final String UPDATE_EMPLOYEE = "UPDATE employee SET firstName = ?, lastName = ? "
-                + "WHERE id = ?";
-        jdbc.update(UPDATE_EMPLOYEE,
-                employee.getFirstName(),
-                employee.getLastName(),
-                employee.getId());
+    public void updateAccountType(AccountTypeDto account) {
+        final String UPDATE_ACCOUNTTYPE = "UPDATE accounttypes SET accountType = ? "
+                + "WHERE accountTypeId = ?";
+        jdbc.update(UPDATE_ACCOUNTTYPE,
+                account.getAccountType(),
+                account.getAccountTypeId());
     }
 
-    @Override
-    @Transactional
-    public void deleteEmployeeById(int id) {
-        final String DELETE_MEETING_EMPLOYEE = "DELETE FROM meeting_employee "
-                + "WHERE employeeId = ?";
-        jdbc.update(DELETE_MEETING_EMPLOYEE, id);
-        
-        final String DELETE_EMPLOYEE = "DELETE FROM employee WHERE id = ?";
-        jdbc.update(DELETE_EMPLOYEE, id);
-    }      
-}
 }

@@ -21,6 +21,7 @@ public class PurchaseDaoImpl implements PurchaseDao{
         @Override
         public purchase mapRow(ResultSet rs, int index) throws SQLException {
             purchase pu = new purchase();
+            pu.setId(rs.getInt("id"));
             pu.setDate(rs.getDate("date").toLocalDate());
             pu.setPrice(rs.getBigDecimal("purchasePrice"));
             pu.setCustName(rs.getString("customerName"));

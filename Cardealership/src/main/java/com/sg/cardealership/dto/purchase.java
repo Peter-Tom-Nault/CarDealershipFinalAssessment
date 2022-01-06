@@ -15,6 +15,7 @@ public class purchase {
     private UserDto user;
     private VehicleDto vehicle;
 
+    private int id;
     private LocalDate date;
     private BigDecimal price;
     private String custName;
@@ -22,60 +23,67 @@ public class purchase {
     
     private Address address;
 
-	public UserDto getUser() {
-		return user;
-	}
+    public UserDto getUser() {
+            return user;
+    }
 
-	public void setUser(UserDto user) {
-		this.user = user;
-	}
+    public void setUser(UserDto user) {
+            this.user = user;
+    }
 
-	public VehicleDto getVehicle() {
-		return vehicle;
-	}
+    public VehicleDto getVehicle() {
+            return vehicle;
+    }
 
-	public void setVehicle(VehicleDto vehicle) {
-		this.vehicle = vehicle;
-	}
+    public void setVehicle(VehicleDto vehicle) {
+            this.vehicle = vehicle;
+    }
 
-	public LocalDate getDate() {
-		return date;
-	}
+    public LocalDate getDate() {
+            return date;
+    }
 
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
+    public void setDate(LocalDate date) {
+            this.date = date;
+    }
 
-	public BigDecimal getPrice() {
-		return price;
-	}
+    public BigDecimal getPrice() {
+            return price;
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    public void setPrice(BigDecimal price) {
+            this.price = price;
+    }
 
-	public String getCustName() {
-		return custName;
-	}
+    public String getCustName() {
+            return custName;
+    }
 
-	public void setCustName(String custName) {
-		this.custName = custName;
-	}
+    public void setCustName(String custName) {
+            this.custName = custName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+            return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+            this.email = email;
+    }
 
-	public Address getAddress() {
-		return address;
-	}
+    public Address getAddress() {
+            return address;
+    }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+    public void setAddress(Address address) {
+            this.address = address;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
 }
