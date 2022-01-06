@@ -38,15 +38,15 @@ public class ManufacturerDaoImpl implements ManufacturerDao{
     
     @Override
     public List<ManufacturerDto> getAllManufacturers() {
-        final String SELECT_ALL_CONTACTINFORMATIONS = "SELECT * FROM contactInformation";
-        return jdbc.query(SELECT_ALL_CONTACTINFORMATIONS, new ManufacturerMapper());
+        final String SELECT_ALL_MANUFACTURERS = "SELECT * FROM manufacturer";
+        return jdbc.query(SELECT_ALL_MANUFACTURERS, new ManufacturerMapper());
     }
 
     @Override
     public ManufacturerDto getManufacturerById(int id) {
         try {
-            final String SELECT_CONTACTINFORMATION_BY_ID = "SELECT * FROM contactInformation WHERE id = ?";
-            return jdbc.queryForObject(SELECT_CONTACTINFORMATION_BY_ID, new ManufacturerMapper(), id);
+            final String SELECT_MANUFACTURER_BY_ID = "SELECT * FROM manufacturer WHERE id = ?";
+            return jdbc.queryForObject(SELECT_MANUFACTURER_BY_ID, new ManufacturerMapper(), id);
         } catch(DataAccessException ex) {
             return null;
         }
@@ -54,38 +54,37 @@ public class ManufacturerDaoImpl implements ManufacturerDao{
 
     @Override
     @Transactional
-    public ManufacturerDto addManufacturer(ManufacturerDto contact) {
-        final String INSERT_CONTACTINFORmaTION = "INSERT INTO contactInformation(firstName, lastName, message, email, phone) "
-                + "VALUES(?,?,?,?,?)";
-        jdbc.update(INSERT_CONTACTINFORmaTION, 
-                contact.getFirstName(),
-                contact.getLastName(),
-                contact.getMessage(),
-                contact.getEmail(),
-                contact.getPhone());
+    public ManufacturerDto addManufacturer(ManufacturerDto man) {
+        final String INSERT_MANUFACTURER = "INSERT INTO manufacturer(name, country)"
+                + "VALUES(?,?)";
+        jdbc.update(INSERT_MANUFACTURER, 
+                man.getManufacturerName(),
+                man.getCountry());
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        contact.setId(newId);
-        return contact;
+        man.setId(newId);
+        return man;
     }
 
     @Override
-    public void updateManufacturer(ManufacturerDto contact) {
-        final String UPDATE_CONTACTINFORMATION = "UPDATE contactInformation SET firstName = ?, lastName = ?, message = ?, email = ?, phone = ? "
+    public void updateManufacturer(ManufacturerDto man) {
+        final String UPDATE_MANUFACTURER = "UPDATE manufacturer SET name = ?, country = ?"
                 + "WHERE id = ?";
-        jdbc.update(UPDATE_CONTACTINFORMATION,
-                contact.getFirstName(),
-                contact.getLastName(),
-                contact.getMessage(),
-                contact.getEmail(),
-                contact.getPhone(),
-                contact.getId());
+        jdbc.update(UPDATE_MANUFACTURER,
+                man.getManufacturerName(),
+                man.getCountry(),
+                man.getId());
     }
 
     @Override
+    @Transactional
     public void deleteManufacturerById(int id) {
 
-        final String DELETE_CONTACT = "DELETE FROM contactInformation WHERE id = ?";
-        jdbc.update(DELETE_CONTACT, id);
+        final String DELETE_MODEL_MANUFACTURER = "DELETE FROM model "
+                + "WHERE make = ?";
+        jdbc.update(DELETE_MODEL_MANUFACTURER, id);
+        
+        final String DELETE_MANUFACTURER = "DELETE FROM manufacturer WHERE id = ?";
+        jdbc.update(DELETE_MANUFACTURER, id);
     }  
     
 }

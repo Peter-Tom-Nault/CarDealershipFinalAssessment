@@ -4,10 +4,20 @@
  */
 package com.sg.cardealership.dao;
 
+import com.sg.cardealership.dto.ManufacturerDto;
+import com.sg.cardealership.dto.ModelDto;
+import java.util.List;
+
 /**
  *
  * @author Cna
  */
 public interface ModelDao {
+    public ModelDto getModelByid(int id);
+    public List<ModelDto> getAllModels();
+    public List<ModelDto> getModelsForManufacturer(ManufacturerDto man);
+    public ModelDto addModel(ModelDto model);
+    public void updateModel(ModelDto model);
+    public void deleteModelById(int id);
     
 }
