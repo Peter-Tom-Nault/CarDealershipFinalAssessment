@@ -19,7 +19,7 @@ public class InventoryReport {
 		stockValue = new BigDecimal("0.00");
 		for(VehicleDto v: vehicleList) {
 			count++;
-			stockValue.add(new BigDecimal(v.getMsrp()));
+			stockValue.add(v.getMsrp());
 		}
 	}
 	public int getYear() {

@@ -35,7 +35,7 @@ public interface ServiceLayer {
 
     public List<VehicleDto> searchResultForSale(Map<String, String> map);
 
-	public purchase purchase(int vehicleId, purchase purchase);
+	public purchase purchase(purchase purchase);
 
 	public List<VehicleDto> adminSearch(Map<String, String> map);
 

@@ -44,7 +44,9 @@ public class ServiceLayerImpl implements ServiceLayer{
 	 */
     @Override
     public List<VehicleDto> ReturnFeatureAndSpecial() {
-    	return vehicles.getFeaturedVehicles();
+    	List<VehicleDto> allvehicles = new ArrayList<>();
+    	List<VehicleDto> featuredVehicles = allvehicles.stream().filter((v) -> v.isFeatured()).collect(Collectors.toList());
+    	return featuredVehicles;
     }
 
     /**
@@ -57,7 +59,11 @@ public class ServiceLayerImpl implements ServiceLayer{
 
     @Override
     public int insertContacts(ContactInformationDto ContactDto) {
-    	contactInfo.addContact(ContactDto);
+    	ContactInformationDto addedContact = contactInfo.addContactInfo(ContactDto);
+    	if(addedContact.getId() != ContactDto.getId()) {
+    		return 1;
+    	}
+    	return 0;
     }
 
     @Override
@@ -67,12 +73,13 @@ public class ServiceLayerImpl implements ServiceLayer{
 
     @Override
     public List<VehicleDto> searchResultForSale(Map<String, String> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<VehicleDto> allVehicles = vehicles.getAllVehicles();
+        return null;
     }
 
 	@Override
-	public purchase purchase(int vehicleId, com.sg.cardealership.dto.purchase purchase) {
-		return purchases.addPurchase(vehicleId, purchase);
+	public purchase purchase(com.sg.cardealership.dto.purchase purchase) {
+		return purchases.addPurchase(purchase);
 	}
 
 	@Override
@@ -99,7 +106,7 @@ public class ServiceLayerImpl implements ServiceLayer{
 
 	@Override
 	public int adminAddUser(UserDto user) {
-		users.addUsers(user);
+		users.addUser(user);
 		return 0;
 	}
 
@@ -107,33 +114,34 @@ public class ServiceLayerImpl implements ServiceLayer{
 	public int adminUpdateUser(UserDto user) {
 		
 		if(user.getPassword() == null) {
-
-			users.updateUser(user, false);
-			return 1;
-		}		
-		else {
-			users.updateUser(user, true);
-			return 1;
+			user.setPassword(users.getUserByid(user.getUserId()).getPassword());
 		}
+		
+		users.updateUser(user);
+		
 		return 0;
 	}
 
+	//this needs login stuff so it can only affect the current user
 	@Override
 	public int accountChangePass(Map<String, String> map) {
+		/*
 		if(map.get("password").equals(map.get("confirmPassword"))) {
 			users.updateUser(currentUser, true);
 		}
+		
+		*/
 		return 0;
 	}
 
 	@Override
 	public List<ManufacturerDto> adminMakesList() {
-		return manufacturers.getAllMakes();
+		return manufacturers.getAllManufacturers();
 	}
 
 	@Override
 	public int adminAddMake(ManufacturerDto make) {
-		manufacturers.addMake(make);
+		manufacturers.addManufacturer(make);
 		return 0;
 	}
 
@@ -150,13 +158,13 @@ public class ServiceLayerImpl implements ServiceLayer{
 
 	@Override
 	public int adminAddSpecial(Special special) {
-		specials.addSpecial(special);
+		specials.addSpecialInfo(special);
 		return 0;
 	}
 
 	@Override
 	public int adminRemoveSpecial(int specialId) {
-		specials.removeSpecialById(specialId);
+		specials.deleteSpecialById(specialId);
 		return 0;
 	}
 
@@ -203,6 +211,15 @@ public class ServiceLayerImpl implements ServiceLayer{
 	public int accountLogin(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	private List<VehicleDto> searchVehiclesByConditions(Map<String, String> cond){
+		List<VehicleDto> all = new ArrayList<>();
+		String yearMakeModel =  cond.get("yearMakeModel");
+		all = all.stream().filter((v) -> (v.getYear() + " " + v.getModel().getModelName() + " " + v.getModel().getManufacturer().getManufacturerName()).contains(yearMakeModel)).collect(Collectors.toList());
+		all = all.stream().filter((v) -> v.getYear() > Integer.parseInt(cond.get("minYear")) && v.getYear() < Integer.parseInt(cond.get("maxYear"))).collect(Collectors.toList());
+		all = all.stream().filter((v) -> v.getMsrp().compareTo(yearMakeModel)
+		return all;
 	}
     
 }
