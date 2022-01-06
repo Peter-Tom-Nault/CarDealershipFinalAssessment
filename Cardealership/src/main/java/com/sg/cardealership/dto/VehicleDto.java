@@ -119,6 +119,14 @@ public class VehicleDto {
 	public void setOptional(List<OptionalFeatureDto> optional) {
 		this.optional = optional;
 	}
+	@Override
+	public String toString() {
+		return "VehicleDto [vin=" + vin + ", year=" + year + ", exteriorColor=" + exteriorColor + ", interiorColor="
+				+ interiorColor + ", bodyType=" + bodyType + ", transmission=" + transmission + ", msrp=" + msrp
+				+ ", salePrice=" + salePrice + ", photo=" + photo + ", mileage=" + mileage + ", description="
+				+ description + ", purchased=" + purchased + ", featured=" + featured + ", model=" + model
+				+ ", optional=" + optional + "]";
+	}
     
     
     

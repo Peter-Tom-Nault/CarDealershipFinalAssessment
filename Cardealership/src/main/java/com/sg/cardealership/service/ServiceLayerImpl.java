@@ -208,6 +208,9 @@ public class ServiceLayerImpl implements ServiceLayer{
 	@Override
 	public List<InventoryReport> reportInventoryNew() {
 		List<VehicleDto> newVehicles = vehicles.getAllVehicle().stream().filter((v) -> v.getMileage()<1000).collect(Collectors.toList());
+		for(VehicleDto v: newVehicles) {
+			v.setModel(models.getModelByid(v.getModel().getId()));
+		}
 		Map<ModelDto, List<VehicleDto>> vehiclesByModel = newVehicles.stream().collect(Collectors.groupingBy(VehicleDto::getModel));
 		List<InventoryReport> invReport = new ArrayList<>();
 		for(List<VehicleDto> vehicleList: vehiclesByModel.values()) {
@@ -219,6 +222,9 @@ public class ServiceLayerImpl implements ServiceLayer{
 	@Override
 	public List<InventoryReport> reportInventoryUsed() {
 		List<VehicleDto> usedVehicles =  vehicles.getAllVehicle().stream().filter((v) -> v.getMileage()>=1000).collect(Collectors.toList());
+		for(VehicleDto v: usedVehicles) {
+			v.setModel(models.getModelByid(v.getModel().getId()));
+		}
 		Map<ModelDto, List<VehicleDto>> vehiclesByModel = usedVehicles.stream().collect(Collectors.groupingBy(VehicleDto::getModel));
 		List<InventoryReport> invReport = new ArrayList<>();
 		for(List<VehicleDto> vehicleList: vehiclesByModel.values()) {
@@ -239,10 +245,17 @@ public class ServiceLayerImpl implements ServiceLayer{
 	
 	private List<VehicleDto> searchVehiclesByConditions(Map<String, String> cond){
 		List<VehicleDto> all = vehicles.getAllVehicle();
+		for(VehicleDto v: all) {
+			v.setModel(models.getModelByid(v.getModel().getId()));
+		}
+		
 		String yearMakeModel =  cond.get("yearMakeModel");
 		all = all.stream().filter((v) -> (v.getYear() + " " + v.getModel().getModelName() + " " + v.getModel().getManufacturer().getManufacturerName()).contains(yearMakeModel)).collect(Collectors.toList());
+		
 		all = all.stream().filter((v) -> v.getYear() > Integer.parseInt(cond.get("minYear")) && v.getYear() < Integer.parseInt(cond.get("maxYear"))).collect(Collectors.toList());
+		
 		all = all.stream().filter((v) -> (v.getMsrp().compareTo(new BigDecimal(cond.get("minPrice"))) >= 0) && v.getMsrp().compareTo(new BigDecimal(cond.get("maxPrice"))) <=0 ).collect(Collectors.toList());
+		
 		return all;
 	}
 
