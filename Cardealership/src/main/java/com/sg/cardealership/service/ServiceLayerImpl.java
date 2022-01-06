@@ -10,19 +10,15 @@ import java.util.Map;
 import com.sg.cardealership.dao.*;
 
 import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
 import org.springframework.stereotype.Service;
-=======
->>>>>>> be16f4f88898b827f3fa5fffca20c43cf2194e7b
+
 
 /**
  *
  * @author Cna
  */
-<<<<<<< HEAD
+
 @Service
-=======
->>>>>>> be16f4f88898b827f3fa5fffca20c43cf2194e7b
 public class ServiceLayerImpl implements ServiceLayer{
 	
 	AccountTypeDao accountType;
@@ -34,14 +30,11 @@ public class ServiceLayerImpl implements ServiceLayer{
 	SpecialDao specials;
 	UserDao users;
 	VehicleDao vehicles;
-<<<<<<< HEAD
     public ServiceLayerImpl()
     {
         
     }
-=======
 
->>>>>>> be16f4f88898b827f3fa5fffca20c43cf2194e7b
 	/**
 	 * return a list of vehicles that are featured
 	 */
@@ -108,11 +101,11 @@ public class ServiceLayerImpl implements ServiceLayer{
 	@Override
 	public int adminUpdateUser(UserDto user) {
 		
-<<<<<<< HEAD
+
 		if(user.getPassword()user == null) {
-=======
+
 		if(user.getPassword() == null) {
->>>>>>> be16f4f88898b827f3fa5fffca20c43cf2194e7b
+
 			users.updateUser(user, false);
 			return 1;
 		}		

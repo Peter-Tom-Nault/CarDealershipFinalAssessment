@@ -14,10 +14,7 @@ import java.time.LocalDate;
 public class purchase {
     private UserDto user;
     private VehicleDto vehicle;
-<<<<<<< HEAD
-    
-=======
->>>>>>> be16f4f88898b827f3fa5fffca20c43cf2194e7b
+
     private LocalDate date;
     private BigDecimal price;
     private String custName;

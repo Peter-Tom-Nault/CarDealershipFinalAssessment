@@ -12,13 +12,11 @@ public class UserDto {
     private int userId;
     private String userName;
     private String password;
-<<<<<<< HEAD
+
     
     private AccountTypeDto account;
     
-=======
-    private AccountTypeDto account;
->>>>>>> be16f4f88898b827f3fa5fffca20c43cf2194e7b
+
     private String email;
     
     
