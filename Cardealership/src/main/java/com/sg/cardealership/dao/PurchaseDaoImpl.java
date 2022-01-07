@@ -52,12 +52,12 @@ public class PurchaseDaoImpl implements PurchaseDao{
             address.setStreet(rs.getString("streetAddress"));
             address.setZip(rs.getInt("zip"));
             pu.setAddress(address);
-            VehicleDto empty = new VehicleDto();
-            empty.setVin(rs.getString("VIN"));
-            pu.setVehicle(empty);
-            UserDto temp = new UserDto();
-            temp.setUserId(rs.getInt("salespersonId"));
-            pu.setUser(temp);
+//            VehicleDto empty = new VehicleDto();
+//            empty.setVin(rs.getString("VIN"));
+//            pu.setVehicle(empty);
+//            UserDto temp = new UserDto();
+//            temp.setUserId(rs.getInt("salespersonId"));
+//            pu.setUser(temp);
             return pu;
         }
     }
@@ -78,16 +78,16 @@ public class PurchaseDaoImpl implements PurchaseDao{
     
     private UserDto getUserForPurchase(purchase pu) {
         final String SELECT_USER_FOR_PURCHASE = "SELECT u.* FROM user u "
-                + "JOIN purchase pu ON u.userId = pu.salesPersonId WHERE pu.Id = ?";
+                + "JOIN purchase pu ON u.userId = pu.salesPersonId WHERE pu.id = ?";
         return jdbc.queryForObject(SELECT_USER_FOR_PURCHASE, new UserDaoMapper(), 
-                pu.getUser().getUserId());
+                pu.getId());
     }
     
     private VehicleDto getVehicleForPurchase(purchase pu) {
         final String SELECT_VEHICLE_FOR_PURCHASE = "SELECT v.* FROM vehicle v "
-                + "JOIN purchase pu ON v.VIN = pu.VIN WHERE pu.VIN = ?";
+                + "JOIN purchase pu ON v.VIN = pu.VIN WHERE pu.id = ?";
         return jdbc.queryForObject(SELECT_VEHICLE_FOR_PURCHASE, new VehicleMapper(), 
-        		pu.getVehicle().getVin());
+        		pu.getId());
     }
     
     @Override

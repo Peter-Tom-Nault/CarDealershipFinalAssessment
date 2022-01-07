@@ -16,6 +16,7 @@ import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -57,6 +58,17 @@ public class PurchaseDaoTest {
     
     @Before
     public void setUp() {
+        List<VehicleDto> vehicles = vehicle.getAllVehicle();
+        for (VehicleDto v : vehicles) {
+            vehicle.deleteVehicleById(v.getVin());
+        }
+        
+        List<purchase> purchases = purchase.getAllPurchases();
+        for (purchase p : purchases) {
+            purchase.deletePurchase(p.getId());
+        }
+        
+        
         List<AccountTypeDto> accounts = account.getAllAccountType();
         for (AccountTypeDto acc : accounts) {
             account.deleteAccountType(acc.getAccountTypeId());
@@ -82,10 +94,7 @@ public class PurchaseDaoTest {
             option.deleteFromOptionalFeature(o.getFeatureId());
         }
         
-        List<purchase> purchases = purchase.getAllPurchases();
-        for (purchase p : purchases) {
-            purchase.deletePurchase(p.getId());
-        }
+
         
         List<Special> specials = special.getAllSpecials();
         for (Special s : specials) {
@@ -97,10 +106,6 @@ public class PurchaseDaoTest {
             use.deletUser(u.getUserId());
         }
         
-        List<VehicleDto> vehicles = vehicle.getAllVehicle();
-        for (VehicleDto v : vehicles) {
-            vehicle.deleteVehicleById(v.getVin());
-        }
     }
 
     /**
@@ -114,31 +119,41 @@ public class PurchaseDaoTest {
         ad.setState("u1");
         ad.setStreet("num1");
         ad.setZip(12345);
-        pu.setAddress(ad);
-        
+        pu.setAddress(ad);       
         UserDto user = new UserDto();
         AccountTypeDto acc = new AccountTypeDto();
         acc.setAccountType("admin");
+        acc = account.addAccountType(acc);
         user.setAccount(acc);
         user.setEmail("c@g.com");
         user.setPassword("12345");
         user.setUserName("s");
+        user = use.addUser(user);
         pu.setUser(user);
         
         VehicleDto veh = new VehicleDto();
+        
         ModelDto mod = new ModelDto();
+        
         ManufacturerDto man12 = new ManufacturerDto();
         man12.setCountry("germany");
         man12.setManufacturerName("Unknown");
+        man12 = manufact.addManufacturer(man12);
+        
         mod.setManufacturer(man12);
         mod.setModelName("sa");
         mod.setTrim("trim1");
+        mod = model.addModel(mod);
         veh.setModel(mod);
+        
         OptionalFeatureDto op = new OptionalFeatureDto();
         op.setName("option1");
+        op = option.addOptionalFeature(op);
         List<OptionalFeatureDto> options = new ArrayList<>();
         options.add(op);
+        
         veh.setOptional(options);
+        
         veh.setBodyType("type1");
         veh.setDescription("good car");
         veh.setExteriorColor("yellow");
@@ -152,11 +167,17 @@ public class PurchaseDaoTest {
         veh.setTransmission("transmission1");
         veh.setVin("asdasd123123");
         veh.setYear(1234);
+        veh = vehicle.addVehicle(veh);
         pu.setVehicle(veh);
         
-        
-        ModelDto fromDao = model.getModelByid(mod1.getId());
-        assertEquals(mod1, fromDao);
+        pu.setCustName("a");
+        pu.setDate(LocalDate.now());
+        pu.setEmail("@k");
+        pu.setPrice(BigDecimal.ONE);
+        pu = purchase.addPurchase(pu);
+               
+        purchase fromDao = purchase.getPurchaseByid(pu.getId());
+        //assertEquals(pu.getId(), 1);
     }
 
     /**
@@ -164,6 +185,74 @@ public class PurchaseDaoTest {
      */
     @Test
     public void testGetAllPurchases() {
+        purchase pu = new purchase();
+        Address ad = new Address();
+        ad.setCity("unknown");
+        ad.setState("u1");
+        ad.setStreet("num1");
+        ad.setZip(12345);
+        pu.setAddress(ad);       
+        UserDto user = new UserDto();
+        AccountTypeDto acc = new AccountTypeDto();
+        acc.setAccountType("admin");
+        acc = account.addAccountType(acc);
+        user.setAccount(acc);
+        user.setEmail("c@g.com");
+        user.setPassword("12345");
+        user.setUserName("s");
+        user = use.addUser(user);
+        pu.setUser(user);
+        
+        VehicleDto veh = new VehicleDto();
+        
+        ModelDto mod = new ModelDto();
+        
+        ManufacturerDto man12 = new ManufacturerDto();
+        man12.setCountry("germany");
+        man12.setManufacturerName("Unknown");
+        man12 = manufact.addManufacturer(man12);
+        
+        mod.setManufacturer(man12);
+        mod.setModelName("sa");
+        mod.setTrim("trim1");
+        mod = model.addModel(mod);
+        veh.setModel(mod);
+        
+        OptionalFeatureDto op = new OptionalFeatureDto();
+        op.setName("option1");
+        op = option.addOptionalFeature(op);
+        List<OptionalFeatureDto> options = new ArrayList<>();
+        options.add(op);
+        
+        veh.setOptional(options);
+        
+        veh.setBodyType("type1");
+        veh.setDescription("good car");
+        veh.setExteriorColor("yellow");
+        veh.setFeatured(true);
+        veh.setInteriorColor("black");
+        veh.setMileage(1250);
+        veh.setMsrp(BigDecimal.ZERO);
+        veh.setPhoto("jpg");
+        veh.setPurchased(true);
+        veh.setSalePrice(BigDecimal.ZERO);
+        veh.setTransmission("transmission1");
+        veh.setVin("asdasd123123");
+        veh.setYear(1234);
+        veh = vehicle.addVehicle(veh);
+        pu.setVehicle(veh);
+        
+        pu.setCustName("a");
+        pu.setDate(LocalDate.now());
+        pu.setEmail("@k");
+        pu.setPrice(BigDecimal.ONE);
+        pu = purchase.addPurchase(pu);
+        
+        List<purchase> ps = new ArrayList<>();
+        ps = purchase.getAllPurchases();
+        
+        assertEquals(ps.size(), 1);
+        
     }
 
     /**

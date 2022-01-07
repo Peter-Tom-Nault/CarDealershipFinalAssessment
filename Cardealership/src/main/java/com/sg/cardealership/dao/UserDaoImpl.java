@@ -94,7 +94,7 @@ public class UserDaoImpl implements UserDao{
     @Override
     @Transactional
     public UserDto addUser(UserDto user) {
-        final String INSERT_USER = "INSERT INTO user(username, accountType, passowrd, email) VALUES(?,?,?,?)";
+        final String INSERT_USER = "INSERT INTO user(username, accountType, password, email) VALUES(?,?,?,?)";
         jdbc.update(INSERT_USER,
                 user.getUserName(),
                 user.getAccount().getAccountTypeId(),
