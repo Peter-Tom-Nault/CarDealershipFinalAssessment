@@ -20,6 +20,9 @@ public class OptionalFeatureDto {
 	public void setFeatureId(int featureId) {
 		this.featureId = featureId;
 	}
+	public void setFeatureId(String featureIdAsString) {
+		this.featureId = Integer.parseInt(featureIdAsString);
+	}
 	public String getName() {
 		return name;
 	}

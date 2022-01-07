@@ -40,27 +40,35 @@ function populateOptionals(){
 }
 
 $('#addButton').on('click', function() {
-    newModel = $('#model').val();
-    optFeat = $('#optionals').val();
+    $('#test').append('<p>'+$('#optionals').val()[0]+'<p>');
+    var optionalIds = $('#optionals').val();
+    var optionalJsons = [];
+    $.each(optionalIds, function(index, option){
+        var obj = JSON.parse('{"featureId": ' +option + '}');
+        optionalJsons.push(obj);
+
+    })
     $.ajax({
         type: 'POST',
         url: 'http://localhost:8080/home/Admin/AddVehicle',
         data: JSON.stringify({
             vin: $('#vin').val(),
             year: $('#year').val(),
-            exteriorColor: $('#color'),
-            interiorColor: $('#interior'),
-            bodyType: $('#bodystyle'),
-            transmission: $('#transmission'),
-            msrp: $('#msrp'),
-            salePrice: $('#salesprice'),
-            photo: newModel.id+".jpg",
-            mileage: $('#mileage'),
-            description: $('#message'),
+            exteriorColor: $('#color').val(),
+            interiorColor: $('#interior').val(),
+            bodyType: $('#bodystyle').val(),
+            transmission: $('#transmission').val(),
+            msrp: $('#msrp').val(),
+            salePrice: $('#salesprice').val(),
+            photo: $('#model').val().id+".jpg",
+            mileage: $('#mileage').val(),
+            description: $('#message').val(),
             purchased: false,
             featured: false,
-            model: newModel,
-            optional: optFeat
+            model: {
+                id: $('#model').val()
+            },
+            optional: optionalJsons
         }),
        headers: {
            'Accept': 'application/json',
