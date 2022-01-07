@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+
+  <title>Car Dealership</title>
+
+  <link rel="stylesheet" href="../../assets/css/maicons.css">
+
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+
+  <link rel="stylesheet" href="../../assets/vendor/animate/animate.css">
+
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <style>
+    .home-banner {
+      background-image: url(../../assets/img/banner2.png);
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Back to top button -->
+  <div class="back-to-top"></div>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
+      <div class="container">
+        <a href="#" class="navbar-brand">Car<span class="text-primary">Dealership</span></a>
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../home/index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../inventory/newinventory.html">New Inventory</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../inventory/usedinventory.html">Used Inventory</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../home/specials.html">Specials</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../home/contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../sales/index.html">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../admin/allusers.html">Contact</a>
+              </li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <div class="m-4">
+    <h3>Sales Report</h3>
+  </div>
+
+  <!-- Error message list -->
+  <ul class="list-group" id="errorMessages"></ul>
+  
+  <!-- report for sales-->
+  <div class="m-4">
+    <div class="head">
+      <h3>Filters</h3>
+    </div>
+    <div class="row">
+
+      <div class="col-2">
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              - All -
+            </a>
+          
+            <div id="salesPersonDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="#">User1</a>
+              <a class="dropdown-item" href="#">User2</a>
+              <a class="dropdown-item" href="#">User3</a>
+            </div>
+          </div>
+      </div>
+
+      <div class="input-group mb-3 p-3">
+        <div class="input-group-prepend">
+          
+        </div>
+        <input type="text" id="fromDate" class="form-control" aria-label="From Date" aria-describedby="inputGroup-sizing-default">
+      </div>
+
+      <div class="input-group mb-3 p-3">
+        <div class="input-group-prepend">
+          
+        </div>
+        <input type="text" id="toDate" class="form-control" aria-label="To Date" aria-describedby="inputGroup-sizing-default">
+      </div>
+
+      <div class="col-12 pt-4">
+        <div class="span8"></div>
+        <div class="col-8 text-center">
+          <button type="button" id="searchButton1" class="btn btn-primary">Search</button>
+        </div>
+        <div class="span4"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="m-4 invisible" id="searchResults">
+    <h3>Search Results</h3>
+  </div>
+  <table id="searchResults" class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">User</th>
+        <th scope="col">Total Sales</th>
+        <th scope="col">Total Vehicles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+  <script src="../../assets/js/jquery-3.5.1.min.js"></script>
+
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+
+  <script src="../../assets/js/google-maps.js"></script>
+
+  <script src="../../assets/vendor/wow/wow.min.js"></script>
+
+  <script src="../../assets/js/theme.js"></script>
+
+  <script src="../../assets/js/newinventory.js"></script>
+</body>
+
+</html>
