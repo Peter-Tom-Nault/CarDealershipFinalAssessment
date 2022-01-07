@@ -100,11 +100,17 @@ public class carDealershipController {
         return ResponseEntity.ok(service.searchResultForSale(pathVariables));
     }
     
+    @GetMapping("/Sales/Index/{minYear}/{maxYear}/{minPrice}/{maxPrice}")
+    public ResponseEntity<List<VehicleDto>> saleSearchNoYMM(@PathVariable Map<String, String> pathVariables)
+    {
+        return ResponseEntity.ok(service.searchResultForSale(pathVariables));
+    }
+    
     
     //Sales/Purchase/Id POST
     //create new purchase in purchase for the VIN at Id, must be done by sales account
-    @PostMapping("/Sales/Purchase/{id}")
-    public ResponseEntity<purchase> purchase(@PathVariable int vehicleId, @RequestBody purchase purchase)
+    @PostMapping("/Sales/Purchase")
+    public ResponseEntity<purchase> purchase( @RequestBody purchase purchase)
     {
     	return ResponseEntity.ok(service.purchase(purchase));
     }

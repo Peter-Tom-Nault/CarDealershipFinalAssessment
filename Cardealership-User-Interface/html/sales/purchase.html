@@ -74,6 +74,12 @@
             <form action="#" class="contact-form py-5 px-lg-5">
               <h2 class="mb-4 font-weight-medium text-secondary">Purchase a Vehicle</h2>
 
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="vin">VIN #</label>
+                         <select type="text" id="vin" class="form-control"></select>
+                </div>
+              </div>
               <div class="row form-group"> <!--row form-group starts here-->
                <div class="col-md-6 mb-3 mb-md-0">
                  <label class="text-black" for="name">Name</label>
@@ -135,6 +141,10 @@
              <label class="text-black" for="zipcode">ZipCode</label>
              <input type="text" id="zipcode" class="form-control">
            </div>
+           <div class="col-md-6 mb-3 mb-md-0">
+            <label class="text-black" for="zipcode">SalesPerson ID</label>
+            <select type="text" id="salesPersonId" class="form-control"></select>
+          </div>
            
          </div><!--row form-group ends here-->
 
