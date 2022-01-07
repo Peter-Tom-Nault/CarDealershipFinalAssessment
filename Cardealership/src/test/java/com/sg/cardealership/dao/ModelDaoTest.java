@@ -4,6 +4,7 @@
  */
 package com.sg.cardealership.dao;
 
+import com.sg.cardealership.TestApplicationConfiguration;
 import com.sg.cardealership.dto.ManufacturerDto;
 import com.sg.cardealership.dto.ModelDto;
 import java.util.List;
@@ -12,12 +13,16 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Cna
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = TestApplicationConfiguration.class)
 public class ModelDaoTest {
     
     public ModelDaoTest() {
