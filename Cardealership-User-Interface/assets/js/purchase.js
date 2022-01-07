@@ -1,42 +1,7 @@
 $(document).ready(function() {
     // alert('addVehicle.js found!');
-    populateVehicle();
-  });
-
-
-function populateModels(){
-    $('#model').empty();
-
-    
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/home/Sales/Purchase',
-        success: function(modelList){
-            $.each(modelList, function(index, model){
-                $('#model').append('<option value="'+ model.id+'">' +model.manufacturer.manufacturerName +' '+ model.modelName + ' ' + model.trim +'</option>');
-            })
-
-        },
-        error: function() {
-            
-        }
-    })
-    
-}
-
-function populateVehicle(){
-
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/home/Sales',
-        success: function(optionalList){
-            $.each(optionalList, function(index, optionalFeat){
-                $('#optionals').append('<option value="' + optionalFeat.featureId+'">'+optionalFeat.name+'</option>')
-            })
-        }
-    })
-    
-}
+});
+var today = new Date();
 
 $('#saveBtn').on('click', function() {
     newModel = $('#model').val();
@@ -46,20 +11,7 @@ $('#saveBtn').on('click', function() {
         url: 'http://localhost:8080/home/Sales/Purchase',
         data: JSON.stringify({
             vin: $('#vin').val(),
-            year: $('#year').val(),
-            exteriorColor: $('#color'),
-            interiorColor: $('#interior'),
-            bodyType: $('#bodystyle'),
-            transmission: $('#transmission'),
-            msrp: $('#msrp'),
-            salePrice: $('#salesprice'),
-            photo: newModel.id+".jpg",
-            mileage: $('#mileage'),
-            description: $('#message'),
-            purchased: false,
-            featured: false,
-            model: newModel,
-            optional: optFeat,
+            date: $('date').val(),
             custumerName: $('name').val(),
             phone: $('phone').val(),
             email: $('email').val(),
