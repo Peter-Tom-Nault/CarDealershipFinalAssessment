@@ -16,4 +16,5 @@ public interface AccountTypeDao {
     public AccountTypeDto getAccountTypeById(int id);
     public AccountTypeDto addAccountType(AccountTypeDto AccountType);
     public void updateAccountType(AccountTypeDto account);
+    public void deleteAccountType(int id);
 }
