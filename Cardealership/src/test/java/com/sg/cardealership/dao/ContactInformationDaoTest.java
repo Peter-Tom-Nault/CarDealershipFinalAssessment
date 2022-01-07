@@ -15,6 +15,10 @@ import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -100,33 +104,83 @@ public class ContactInformationDaoTest {
         }
     }
     
+    /**
+     * Test of AddgetContactInfoById method, of class ContactInformationDao.
+     */
+    @Test
+    public void testAddGetContactInfo() {
+        ContactInformationDto contact1 = new ContactInformationDto();
+        contact1.setEmail("s@g.com");
+        contact1.setFirstName("contactMe");
+        contact1.setLastName("contactLast");
+        contact1.setMessage("nothingSpecial");
+        contact1.setPhone(123456789);
+        
+        contact1 = contact.addContactInfo(contact1);
+        ContactInformationDto fromDao = contact.getContactInfoById(contact1.getId());
+        assertEquals(contact1, fromDao);
+    }
 
     /**
      * Test of getAllContactInformations method, of class ContactInformationDao.
      */
     @Test
     public void testGetAllContactInformations() {
+        ContactInformationDto contact1 = new ContactInformationDto();
+        contact1.setEmail("s@g.com");
+        contact1.setFirstName("contactMe");
+        contact1.setLastName("contactLast");
+        contact1.setMessage("nothingSpecial");
+        contact1.setPhone(123456789);
+        
+        contact1 = contact.addContactInfo(contact1);
+        
+        ContactInformationDto contact2 = new ContactInformationDto();
+        contact2.setEmail("s@g.com2");
+        contact2.setFirstName("contactMe2");
+        contact2.setLastName("contactLast2");
+        contact2.setMessage("nothingSpecial2");
+        contact2.setPhone(987654321);
+        
+        contact2 = contact.addContactInfo(contact2);
+        
+        List<ContactInformationDto> contacts = contact.getAllContactInformations();
+        
+        assertEquals(2, contacts.size());
+        assertTrue(contacts.contains(contact1));
+        assertTrue(contacts.contains(contact2));
     }
 
-    /**
-     * Test of getContactInfoById method, of class ContactInformationDao.
-     */
-    @Test
-    public void testGetContactInfoById() {
-    }
-
-    /**
-     * Test of addContactInfo method, of class ContactInformationDao.
-     */
-    @Test
-    public void testAddContactInfo() {
-    }
 
     /**
      * Test of updateContact method, of class ContactInformationDao.
      */
     @Test
     public void testUpdateContact() {
+        ContactInformationDto contact1 = new ContactInformationDto();
+        contact1.setEmail("s@g.com");
+        contact1.setFirstName("contactMe");
+        contact1.setLastName("contactLast");
+        contact1.setMessage("nothingSpecial");
+        contact1.setPhone(123456789);
+        
+        ContactInformationDto fromDao = contact.getContactInfoById(contact1.getId());
+        
+        assertEquals(contact1, fromDao);
+        
+        contact1.setEmail("s@g.com2");
+        contact1.setFirstName("contactMe2");
+        contact1.setLastName("contactLast2");
+        contact1.setMessage("nothingSpecial2");
+        contact1.setPhone(987654321);
+        
+        contact.updateContact(contact1);
+        
+        assertNotEquals(contact1, fromDao);
+        
+        fromDao = contact.getContactInfoById(contact1.getId());
+        
+        assertEquals(contact1, fromDao);        
     }
 
     /**
@@ -134,7 +188,17 @@ public class ContactInformationDaoTest {
      */
     @Test
     public void testDeleteContactById() {
-    }
-
-    
+        ContactInformationDto contact1 = new ContactInformationDto();
+        contact1.setEmail("s@g.com");
+        contact1.setFirstName("contactMe");
+        contact1.setLastName("contactLast");
+        contact1.setMessage("nothingSpecial");
+        contact1.setPhone(123456789);
+        
+        contact.deleteContactById(contact1.getId());
+        
+        ContactInformationDto fromDao = contact.getContactInfoById(contact1.getId());
+        
+        assertNull(fromDao); 
+    }    
 }
