@@ -259,6 +259,12 @@ public class ServiceLayerImpl implements ServiceLayer{
 		return all;
 	}
 
+	@Override
+	public List<OptionalFeatureDto> getAllOptional() {
+		// TODO Auto-generated method stub
+		return optFeatures.getAllOptionalFeatures();
+	}
+
 	
     
 }

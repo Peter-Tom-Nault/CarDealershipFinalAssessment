@@ -1,6 +1,7 @@
 $(document).ready(function() {
     //alert('addVehicle.js found!');
     populateModels();
+    populateOptionals();
   });
 
 
@@ -21,5 +22,9 @@ function populateModels(){
             
         }
     })
+    
+}
+
+function populateOptionals(){
     
 }

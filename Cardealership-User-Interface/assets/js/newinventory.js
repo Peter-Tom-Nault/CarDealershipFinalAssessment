@@ -1,20 +1,26 @@
 $(document).ready(function() {
-  alert('newinventory.js found!');
+ // alert('newinventory.js found!');
 });
 
 var $results = $('#searchResultULitems');
 
 $('#searchButton1').on('click', function() {
+  yearMakeModel= $('#makeModel').val(),
+      minPrice= $('#minprice').val(),
+      maxPrice= $('#maxprice').val(),
+      minYear= $('#minYr').val(),
+      maxYear= $('#maxYr').val()
+
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:8080/inventory/new',
-    data: JSON.stringify({
-      yearModelMake: $('#makeModel').val(),
-      minPrice: $('#minprice').val(),
-      maxPrice: $('#maxprice').val(),
-      minYear: $('#minYr').val(),
-      maxYear: $('#maxYr').val()
-    }),
+    url: 'http://localhost:8080/home/inventory/new/' + yearMakeModel +'/' + minYear.toString() + '/' + maxYear.toString() + '/' + minPrice.toString() + '/' + maxPrice.toString(),
+    //data: JSON.stringify({
+     // yearModelMake: $('#makeModel').val(),
+     // minPrice: $('#minprice').val(),
+    //  maxPrice: $('#maxprice').val(),
+     // minYear: $('#minYr').val(),
+     // maxYear: $('#maxYr').val()
+    //}),
     //headers: {'Accept': 'application/json', 'Content-type': 'application/json'},
     'dataType': 'json',
     success: function(results) {
