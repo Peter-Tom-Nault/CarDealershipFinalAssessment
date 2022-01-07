@@ -18,5 +18,5 @@ public interface ModelDao {
     public List<ModelDto> getModelsForManufacturer(ManufacturerDto man);
     public ModelDto addModel(ModelDto model);
     public void updateModel(ModelDto model);
-    
+    public void deleteModel(int id);
 }

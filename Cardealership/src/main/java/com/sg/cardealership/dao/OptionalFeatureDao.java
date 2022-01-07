@@ -16,4 +16,5 @@ public interface OptionalFeatureDao {
     public OptionalFeatureDto getOptionalFeatureById(int id);
     public OptionalFeatureDto addOptionalFeature(OptionalFeatureDto option);
     public void updateOptionalFeature(OptionalFeatureDto option);
+    public void deleteFromOptionalFeature(int id);
 }

@@ -79,5 +79,11 @@ public class OptionalFeatureDaoImpl implements OptionalFeatureDao{
                 option.getFeatureId());
     }
     
+    @Override
+    public void deleteFromOptionalFeature(int id)
+    {
+        
+    }
+    
 }
 
