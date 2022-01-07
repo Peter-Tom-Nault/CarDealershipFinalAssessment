@@ -73,23 +73,27 @@
     <h3>Used Vehicles</h3>
   </div>
 
+  <!-- Error message list -->
+  <ul class="list-group" id="errorMessages"></ul>
+
+  <!-- Search car-->
   <!-- Search car-->
   <div class="m-4">
     <div class="head">
-      <h4>Quick Search</h4>
+      <h3>Quick Search</h3>
     </div>
     <div class="row g-2">
 
       <div class="col-2">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Make/Model">
+          <input type="text" class="form-control" id="makeModel" placeholder="Make/Model">
         </div>
       </div>
 
       <div class="col-2">
         <div class="input-group">
           <span class="input-group-text">$</span>
-          <input type="text" class="form-control" placeholder="min">
+          <input type="text" class="form-control" id="minprice" placeholder="min">
           <span class="input-group-text">.00</span>
         </div>
       </div>
@@ -97,7 +101,7 @@
       <div class="col-2">
         <div class="input-group">
           <span class="input-group-text">$</span>
-          <input type="text" class="form-control" placeholder="max">
+          <input type="text" class="form-control" id="maxprice" placeholder="max">
           <span class="input-group-text">.00</span>
         </div>
       </div>
@@ -105,14 +109,14 @@
 
       <div class="col-2">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="No Min Yr">
+          <input type="text" class="form-control" id="minYr" placeholder="No Min Yr">
           <span class="input-group-text"></span>
         </div>
       </div>
 
       <div class="col-2">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="No Max Yr">
+          <input type="text" class="form-control" id="maxYr" placeholder="No Max Yr">
           <span class="input-group-text"></span>
         </div>
       </div>
@@ -120,7 +124,7 @@
       <div class="col-12 pt-4">
         <div class="span8"></div>
         <div class="col-8 text-center">
-          <button type="button" class="btn btn-primary">Search</button>
+          <button type="button" id="searchButton1" class="btn btn-primary">Search</button>
         </div>
         <div class="span4"></div>
       </div>
@@ -128,7 +132,33 @@
     </div>
   </div>
 
-
+  <div class="m-4 invisible" id="searchResultsUsedInv">
+    <h3>Search Results</h3>
+  </div>
+  <div class="card invisible" id="searchResultsUsedInvList1"style="width: 18rem;">
+    <ul class="m-12 list-group" id="searchResultULitems">
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem1"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem2"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem3"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem4"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem5"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem6"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem7"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem8"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem9"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem10"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem11"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem12"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem13"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem14"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem15"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem16"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem17"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem18"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem19"></li>
+      <li class="list-group-item invisible" id="searchResultsUsedInvItem20"></li>
+    </ul>
+  </div>
 
   <script src="../assets/js/jquery-3.5.1.min.js"></script>
 
@@ -140,6 +170,7 @@
 
   <script src="../assets/js/theme.js"></script>
 
+  <script src="../assets/js/usedinventory.js"></script>
 </body>
 
 </html>
