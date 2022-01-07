@@ -13,7 +13,7 @@ $('#searchButton1').on('click', function() {
 
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:8080/home/inventory/new/' + yearMakeModel +'/' + minYear.toString() + '/' + maxYear.toString() + '/' + minPrice.toString() + '/' + maxPrice.toString(),
+    url: 'http://localhost:8080/home/inventory/new/' + minYear.toString() + '/' + maxYear.toString() + '/' + minPrice.toString() + '/' + maxPrice.toString() + '/' + + yearMakeModel,
     //data: JSON.stringify({
      // yearModelMake: $('#makeModel').val(),
      // minPrice: $('#minprice').val(),
@@ -25,7 +25,7 @@ $('#searchButton1').on('click', function() {
     'dataType': 'json',
     success: function(results) {
       $.each(results, function(result) {
-        $results.append(
+        /*$results.append(
             '<li>year: ' + result.year + ', make: ' + result.make +
             ', model: ' + result.model + ', img: ' + result.img +
             ', body style: ' + result.bodyStyle + ', Trans: ' + result.trans +
@@ -33,8 +33,10 @@ $('#searchButton1').on('click', function() {
             ', Mileage: ' + result.mileage + ', VIN#: ' + result.vin +
             ', Sale Price: ' + result.salePrice + ', MSRP: ' + result.msrp +
 
-            '</li>');
+            '</li>');*/
+            //need to append each result to list
       })
+      //display list that is to hold results
     },
     error: function() {
       $('#errorMessages')
