@@ -58,9 +58,9 @@ public class AccountTypeDaoTest {
     @Before
     public void setUp() {
         List<AccountTypeDto> accounts;
-        for (Game game : games) {
-            gameDao.deleteById(game.getId());
-        }
+       // for (Game game : games) {
+         //   gameDao.deleteById(game.getId());
+       // }
     }
     
     @After
