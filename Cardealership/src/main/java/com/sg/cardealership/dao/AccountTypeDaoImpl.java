@@ -77,5 +77,15 @@ public class AccountTypeDaoImpl implements AccountTypeDao{
                 account.getAccountType(),
                 account.getAccountTypeId());
     }
+    
+    @Override
+    public void deleteAccountType(int id)
+    {
+        final String DELETE_ACCOUNTTYPE_USER = "DELETE FROM user WHERE accounttype = ?";
+        jdbc.update(DELETE_ACCOUNTTYPE_USER, id); 
+        
+        final String DELETE_ACCOUNTTYPE = "DELETE FROM accounttypes WHERE accounttypeid = ?";
+        jdbc.update(DELETE_ACCOUNTTYPE, id);        
+    }
 
 }

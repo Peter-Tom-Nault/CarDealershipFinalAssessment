@@ -57,10 +57,12 @@ public class AccountTypeDaoTest {
     
     @Before
     public void setUp() {
-        List<AccountTypeDto> accounts;
-       // for (Game game : games) {
-         //   gameDao.deleteById(game.getId());
-       // }
+
+        List<AccountTypeDto> accounts = account.getAllAccountType();
+        for (AccountTypeDto acc : accounts) {
+            account.deleteAccountType(acc.getAccountTypeId());
+        }
+
     }
     
     @After
