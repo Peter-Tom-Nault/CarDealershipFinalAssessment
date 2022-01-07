@@ -6,6 +6,7 @@ package com.sg.cardealership.dao;
 
 import com.sg.cardealership.TestApplicationConfiguration;
 import com.sg.cardealership.dto.AccountTypeDto;
+import com.sg.cardealership.dto.Address;
 import com.sg.cardealership.dto.ContactInformationDto;
 import com.sg.cardealership.dto.ManufacturerDto;
 import com.sg.cardealership.dto.ModelDto;
@@ -14,7 +15,10 @@ import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -100,10 +104,59 @@ public class PurchaseDaoTest {
     }
 
     /**
-     * Test of getPurchaseByid method, of class PurchaseDao.
+     * Test of AddgetPurchaseByid method, of class PurchaseDao.
      */
     @Test
-    public void testGetPurchaseByid() {
+    public void testAddGetPurchase() {
+        purchase pu = new purchase();
+        Address ad = new Address();
+        ad.setCity("unknown");
+        ad.setState("u1");
+        ad.setStreet("num1");
+        ad.setZip(12345);
+        pu.setAddress(ad);
+        
+        UserDto user = new UserDto();
+        AccountTypeDto acc = new AccountTypeDto();
+        acc.setAccountType("admin");
+        user.setAccount(acc);
+        user.setEmail("c@g.com");
+        user.setPassword("12345");
+        user.setUserName("s");
+        pu.setUser(user);
+        
+        VehicleDto veh = new VehicleDto();
+        ModelDto mod = new ModelDto();
+        ManufacturerDto man12 = new ManufacturerDto();
+        man12.setCountry("germany");
+        man12.setManufacturerName("Unknown");
+        mod.setManufacturer(man12);
+        mod.setModelName("sa");
+        mod.setTrim("trim1");
+        veh.setModel(mod);
+        OptionalFeatureDto op = new OptionalFeatureDto();
+        op.setName("option1");
+        List<OptionalFeatureDto> options = new ArrayList<>();
+        options.add(op);
+        veh.setOptional(options);
+        veh.setBodyType("type1");
+        veh.setDescription("good car");
+        veh.setExteriorColor("yellow");
+        veh.setFeatured(true);
+        veh.setInteriorColor("black");
+        veh.setMileage(1250);
+        veh.setMsrp(BigDecimal.ZERO);
+        veh.setPhoto("jpg");
+        veh.setPurchased(true);
+        veh.setSalePrice(BigDecimal.ZERO);
+        veh.setTransmission("transmission1");
+        veh.setVin("asdasd123123");
+        veh.setYear(1234);
+        pu.setVehicle(veh);
+        
+        
+        ModelDto fromDao = model.getModelByid(mod1.getId());
+        assertEquals(mod1, fromDao);
     }
 
     /**
@@ -127,12 +180,6 @@ public class PurchaseDaoTest {
     public void testGetpurchasesForVehicle() {
     }
 
-    /**
-     * Test of addPurchase method, of class PurchaseDao.
-     */
-    @Test
-    public void testAddPurchase() {
-    }
 
     /**
      * Test of updatePurchase method, of class PurchaseDao.

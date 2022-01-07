@@ -19,7 +19,7 @@ public class VehicleDto {
     private String bodyType;
     private String transmission;
     private BigDecimal msrp;
-    private String salePrice;
+    private BigDecimal salePrice;
     private String photo;
     private int mileage;
     private String description;
@@ -71,10 +71,10 @@ public class VehicleDto {
 	public void setMsrp(BigDecimal msrp) {
 		this.msrp = msrp;
 	}
-	public String getSalePrice() {
+	public BigDecimal getSalePrice() {
 		return salePrice;
 	}
-	public void setSalePrice(String salePrice) {
+	public void setSalePrice(BigDecimal salePrice) {
 		this.salePrice = salePrice;
 	}
 	public String getPhoto() {
