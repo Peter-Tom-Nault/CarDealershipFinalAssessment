@@ -5,12 +5,17 @@
 package com.sg.cardealership.dao;
 
 import com.sg.cardealership.TestApplicationConfiguration;
+import com.sg.cardealership.dto.AccountTypeDto;
+import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.ManufacturerDto;
+import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
 import com.sg.cardealership.dto.Special;
+import com.sg.cardealership.dto.UserDto;
+import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.purchase;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +51,7 @@ public class SpecialDaoTest {
     public SpecialDaoTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
         List<AccountTypeDto> accounts = account.getAllAccountType();
@@ -101,10 +99,6 @@ public class SpecialDaoTest {
             vehicle.deleteVehicleById(v.getVin());
         }
     }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getAllSpecials method, of class SpecialDao.
@@ -139,27 +133,6 @@ public class SpecialDaoTest {
      */
     @Test
     public void testDeleteSpecialById() {
-    }
-
-    public class SpecialDaoImpl implements SpecialDao {
-
-        public List<Special> getAllSpecials() {
-            return null;
-        }
-
-        public Special getSpecialById(int id) {
-            return null;
-        }
-
-        public Special addSpecialInfo(Special special) {
-            return null;
-        }
-
-        public void updateSpecial(Special special) {
-        }
-
-        public void deleteSpecialById(int id) {
-        }
     }
     
 }

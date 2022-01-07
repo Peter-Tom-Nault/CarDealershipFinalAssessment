@@ -6,12 +6,16 @@ package com.sg.cardealership.dao;
 
 import com.sg.cardealership.TestApplicationConfiguration;
 import com.sg.cardealership.dto.AccountTypeDto;
+import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.ManufacturerDto;
+import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
+import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
+import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.purchase;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +49,6 @@ public class UserDaoTest {
     VehicleDao vehicle;
     
     public UserDaoTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
     }
     
     @Before
@@ -102,10 +98,6 @@ public class UserDaoTest {
             vehicle.deleteVehicleById(v.getVin());
         }
     }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getUserByid method, of class UserDao.
@@ -141,27 +133,4 @@ public class UserDaoTest {
     @Test
     public void testUpdateUser() {
     }
-
-    public class UserDaoImpl implements UserDao {
-
-        public UserDto getUserByid(int id) {
-            return null;
-        }
-
-        public List<UserDto> getAllUsers() {
-            return null;
-        }
-
-        public List<UserDto> getUsersForAccountType(AccountTypeDto account) {
-            return null;
-        }
-
-        public UserDto addUser(UserDto user) {
-            return null;
-        }
-
-        public void updateUser(UserDto user) {
-        }
-    }
-    
 }

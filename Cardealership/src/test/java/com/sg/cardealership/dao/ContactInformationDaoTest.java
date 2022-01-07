@@ -5,12 +5,17 @@
 package com.sg.cardealership.dao;
 
 import com.sg.cardealership.TestApplicationConfiguration;
+import com.sg.cardealership.dto.AccountTypeDto;
 import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.ManufacturerDto;
+import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
+import com.sg.cardealership.dto.Special;
+import com.sg.cardealership.dto.UserDto;
+import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.purchase;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +51,6 @@ public class ContactInformationDaoTest {
     public ContactInformationDaoTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
@@ -102,9 +100,6 @@ public class ContactInformationDaoTest {
         }
     }
     
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getAllContactInformations method, of class ContactInformationDao.
@@ -141,25 +136,5 @@ public class ContactInformationDaoTest {
     public void testDeleteContactById() {
     }
 
-    public class ContactInformationDaoImpl implements ContactInformationDao {
-
-        public List<ContactInformationDto> getAllContactInformations() {
-            return null;
-        }
-
-        public ContactInformationDto getContactInfoById(int id) {
-            return null;
-        }
-
-        public ContactInformationDto addContactInfo(ContactInformationDto contact) {
-            return null;
-        }
-
-        public void updateContact(ContactInformationDto contact) {
-        }
-
-        public void deleteContactById(int id) {
-        }
-    }
     
 }

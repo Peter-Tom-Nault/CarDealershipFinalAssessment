@@ -5,14 +5,17 @@
 package com.sg.cardealership.dao;
 
 import com.sg.cardealership.TestApplicationConfiguration;
+import com.sg.cardealership.dto.AccountTypeDto;
+import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.ManufacturerDto;
+import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
+import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +29,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestApplicationConfiguration.class)
 public class PurchaseDaoTest {
-        @Autowired
+    @Autowired
     AccountTypeDao account;
     @Autowired
     ContactInformationDao contact;
@@ -46,14 +49,6 @@ public class PurchaseDaoTest {
     VehicleDao vehicle;
     
     public PurchaseDaoTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
     }
     
     @Before
@@ -103,10 +98,6 @@ public class PurchaseDaoTest {
             vehicle.deleteVehicleById(v.getVin());
         }
     }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getPurchaseByid method, of class PurchaseDao.
@@ -150,30 +141,4 @@ public class PurchaseDaoTest {
     public void testUpdatePurchase() {
     }
 
-    public class PurchaseDaoImpl implements PurchaseDao {
-
-        public purchase getPurchaseByid(int id) {
-            return null;
-        }
-
-        public List<purchase> getAllPurchases() {
-            return null;
-        }
-
-        public List<purchase> getpurchasesForUser(UserDto user) {
-            return null;
-        }
-
-        public List<purchase> getpurchasesForVehicle(VehicleDto vehicle) {
-            return null;
-        }
-
-        public purchase addPurchase(purchase pu) {
-            return null;
-        }
-
-        public void updatePurchase(purchase pu) {
-        }
-    }
-    
 }

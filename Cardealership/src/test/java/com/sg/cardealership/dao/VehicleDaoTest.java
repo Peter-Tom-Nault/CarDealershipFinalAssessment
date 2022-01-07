@@ -5,14 +5,17 @@
 package com.sg.cardealership.dao;
 
 import com.sg.cardealership.TestApplicationConfiguration;
+import com.sg.cardealership.dto.AccountTypeDto;
+import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.ManufacturerDto;
 import com.sg.cardealership.dto.ModelDto;
 import com.sg.cardealership.dto.OptionalFeatureDto;
+import com.sg.cardealership.dto.Special;
+import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.purchase;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,15 +49,7 @@ public class VehicleDaoTest {
     VehicleDao vehicle;
     public VehicleDaoTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
         List<AccountTypeDto> accounts = account.getAllAccountType();
@@ -103,10 +98,6 @@ public class VehicleDaoTest {
         }
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of getVehicleByid method, of class VehicleDao.
      */
@@ -156,33 +147,4 @@ public class VehicleDaoTest {
     public void testDeleteVehicleById() {
     }
 
-    public class VehicleDaoImpl implements VehicleDao {
-
-        public VehicleDto getVehicleByid(int id) {
-            return null;
-        }
-
-        public List<VehicleDto> getAllVehicle() {
-            return null;
-        }
-
-        public List<VehicleDto> getVehiclesForModel(ModelDto model) {
-            return null;
-        }
-
-        public List<VehicleDto> getVehiclesForOption(OptionalFeatureDto option) {
-            return null;
-        }
-
-        public VehicleDto addVehicle(VehicleDto vehicle) {
-            return null;
-        }
-
-        public void updateVehicle(VehicleDto vehicle) {
-        }
-
-        public void deleteVehicleById(int id) {
-        }
-    }
-    
 }

@@ -5,12 +5,17 @@
 package com.sg.cardealership.dao;
 
 import com.sg.cardealership.TestApplicationConfiguration;
+import com.sg.cardealership.dto.AccountTypeDto;
+import com.sg.cardealership.dto.ContactInformationDto;
 import com.sg.cardealership.dto.ManufacturerDto;
+import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
+import com.sg.cardealership.dto.Special;
+import com.sg.cardealership.dto.UserDto;
+import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.purchase;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +50,7 @@ public class ManufacturerDaoTest {
     
     public ManufacturerDaoTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
         List<AccountTypeDto> accounts = account.getAllAccountType();
@@ -101,10 +98,6 @@ public class ManufacturerDaoTest {
             vehicle.deleteVehicleById(v.getVin());
         }
     }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getAllManufacturers method, of class ManufacturerDao.
@@ -139,27 +132,6 @@ public class ManufacturerDaoTest {
      */
     @Test
     public void testDeleteManufacturerById() {
-    }
-
-    public class ManufacturerDaoImpl implements ManufacturerDao {
-
-        public List<ManufacturerDto> getAllManufacturers() {
-            return null;
-        }
-
-        public ManufacturerDto getManufacturerById(int id) {
-            return null;
-        }
-
-        public ManufacturerDto addManufacturer(ManufacturerDto man) {
-            return null;
-        }
-
-        public void updateManufacturer(ManufacturerDto man) {
-        }
-
-        public void deleteManufacturerById(int id) {
-        }
     }
     
 }

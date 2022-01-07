@@ -55,14 +55,6 @@ public class AccountTypeDaoTest {
     public AccountTypeDaoTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
 
@@ -113,9 +105,6 @@ public class AccountTypeDaoTest {
 
     }
     
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getAllAccountType method, of class AccountTypeDao.
@@ -143,24 +132,6 @@ public class AccountTypeDaoTest {
      */
     @Test
     public void testUpdateAccountType() {
-    }
-
-    public class AccountTypeDaoImpl implements AccountTypeDao {
-
-        public List<AccountTypeDto> getAllAccountType() {
-            return null;
-        }
-
-        public AccountTypeDto getAccountTypeById(int id) {
-            return null;
-        }
-
-        public AccountTypeDto addAccountType(AccountTypeDto AccountType) {
-            return null;
-        }
-
-        public void updateAccountType(AccountTypeDto account) {
-        }
     }
     
 }
