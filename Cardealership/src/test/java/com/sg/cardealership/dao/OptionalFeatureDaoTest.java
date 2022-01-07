@@ -15,6 +15,10 @@ import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -104,27 +108,77 @@ public class OptionalFeatureDaoTest {
      */
     @Test
     public void testGetAllOptionalFeatures() {
+        OptionalFeatureDto op1 = new OptionalFeatureDto();
+        op1.setName("option1");
+        op1 = option.addOptionalFeature(op1);
+        
+        OptionalFeatureDto op2 = new OptionalFeatureDto();
+        op2.setName("option2");
+        op2 = option.addOptionalFeature(op2);
+        
+        List<OptionalFeatureDto> options = option.getAllOptionalFeatures();
+        
+        assertEquals(2, options.size());
+        assertTrue(options.contains(op1));
+        assertTrue(options.contains(op2));
     }
 
     /**
-     * Test of getOptionalFeatureById method, of class OptionalFeatureDao.
+     * Test of AddgetOptionalFeatureById method, of class OptionalFeatureDao.
      */
     @Test
-    public void testGetOptionalFeatureById() {
+    public void testAddGetOptionalFeatureById() {
+        OptionalFeatureDto op1 = new OptionalFeatureDto();
+        op1.setName("option1");
+        op1 = option.addOptionalFeature(op1);
+        OptionalFeatureDto fromDao = option.getOptionalFeatureById(op1.getFeatureId());
+        assertEquals(op1, fromDao);
     }
 
-    /**
-     * Test of addOptionalFeature method, of class OptionalFeatureDao.
-     */
-    @Test
-    public void testAddOptionalFeature() {
-    }
 
     /**
      * Test of updateOptionalFeature method, of class OptionalFeatureDao.
      */
     @Test
     public void testUpdateOptionalFeature() {
+        ManufacturerDto man1 = new ManufacturerDto();
+        man1.setCountry("Canada");
+        man1.setManufacturerName("BENZ");
+        man1 = manufact.addManufacturer(man1);
+        
+        ManufacturerDto fromDao = manufact.getManufacturerById(man1.getId());
+        
+        assertEquals(man1, fromDao);
+        
+        man1.setManufacturerName("BMW");
+        
+        manufact.updateManufacturer(man1);
+        
+        assertNotEquals(man1, fromDao);
+        
+        fromDao = manufact.getManufacturerById(man1.getId());
+        
+        assertEquals(man1, fromDao);
+    }
+    
+    @Test
+    public void testDeleteOptionalFeatureById() {
+//        ManufacturerDto man1 = new ManufacturerDto();
+//        man1.setCountry("Canada");
+//        man1.setManufacturerName("BENZ");
+//        man1 = manufact.addManufacturer(man1);
+//        
+//        ModelDto mod1 = new ModelDto();
+//        mod1.setManufacturer(man1);
+//        mod1.setModelName("1500");
+//        mod1.setTrim("trim1");
+//        mod1 = model.addModel(mod1);
+//        
+//        model.deleteModel(mod1.getId());
+//        
+//        ModelDto fromDao = model.getModelByid(mod1.getId());
+//        
+//        assertNull(fromDao); 
     }
 
 }

@@ -14,8 +14,13 @@ import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -157,6 +162,28 @@ public class ModelDaoTest {
      */
     @Test
     public void testGetModelsForManufacturer() {
+        ManufacturerDto man = new ManufacturerDto();
+        man.setCountry("Canada");
+        man.setManufacturerName("BMW");
+        man = manufact.addManufacturer(man);
+        
+        ModelDto mod1 = new ModelDto();
+        mod1.setManufacturer(man);
+        mod1.setModelName("1500");
+        mod1.setTrim("trim1");
+        mod1 = model.addModel(mod1);
+        
+        ModelDto mod2 = new ModelDto();
+        mod2.setManufacturer(man);
+        mod2.setModelName("15001");
+        mod2.setTrim("trim11");
+        mod2 = model.addModel(mod2);
+        
+        List<ModelDto> modelsforManufacture = model.getModelsForManufacturer(man);
+        
+        assertEquals(2, modelsforManufacture.size());
+        assertTrue(modelsforManufacture.contains(mod1));
+        assertTrue(modelsforManufacture.contains(mod2));
     }
 
     /**
@@ -164,6 +191,51 @@ public class ModelDaoTest {
      */
     @Test
     public void testUpdateModel() {
+        ManufacturerDto man1 = new ManufacturerDto();
+        man1.setCountry("Canada");
+        man1.setManufacturerName("BENZ");
+        man1 = manufact.addManufacturer(man1);
+        
+        ModelDto mod1 = new ModelDto();
+        mod1.setManufacturer(man1);
+        mod1.setModelName("1500");
+        mod1.setTrim("trim1");
+        mod1 = model.addModel(mod1);
+        
+        ModelDto fromDao = model.getModelByid(mod1.getId());
+        
+        assertEquals(mod1, fromDao);
+        
+        mod1.setModelName("15001");
+        
+        model.updateModel(mod1);
+        
+        assertNotEquals(mod1, fromDao);
+        
+        fromDao = model.getModelByid(mod1.getId());
+        
+        assertEquals(mod1, fromDao);
+        
+    }
+    
+    @Test
+    public void testDeleteModelById() {
+        ManufacturerDto man1 = new ManufacturerDto();
+        man1.setCountry("Canada");
+        man1.setManufacturerName("BENZ");
+        man1 = manufact.addManufacturer(man1);
+        
+        ModelDto mod1 = new ModelDto();
+        mod1.setManufacturer(man1);
+        mod1.setModelName("1500");
+        mod1.setTrim("trim1");
+        mod1 = model.addModel(mod1);
+        
+        model.deleteModel(mod1.getId());
+        
+        ModelDto fromDao = model.getModelByid(mod1.getId());
+        
+        assertNull(fromDao); 
     }
 
 }
