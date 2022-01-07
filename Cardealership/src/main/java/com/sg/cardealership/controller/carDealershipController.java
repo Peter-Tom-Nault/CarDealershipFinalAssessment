@@ -112,6 +112,7 @@ public class carDealershipController {
     @PostMapping("/Sales/Purchase")
     public ResponseEntity<purchase> purchase( @RequestBody purchase purchase)
     {
+    	System.out.println("*****" + purchase.getVehicle());
     	return ResponseEntity.ok(service.purchase(purchase));
     }
 	
