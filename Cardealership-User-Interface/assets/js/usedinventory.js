@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    alert('usedinventory.js found!');
+    //alert('usedinventory.js found!');
   });
   
   var $results = $('#searchResultULitems');
