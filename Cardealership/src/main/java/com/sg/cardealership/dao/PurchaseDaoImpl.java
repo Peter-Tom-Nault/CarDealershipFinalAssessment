@@ -163,7 +163,8 @@ public class PurchaseDaoImpl implements PurchaseDao{
                 pu.getAddress().getCity(),
                 pu.getAddress().getState(),
                 pu.getAddress().getZip(),
-                pu.getEmail());
+                pu.getEmail(),
+                pu.getId());
     }
     @Override
     public void deletePurchase(int id)
