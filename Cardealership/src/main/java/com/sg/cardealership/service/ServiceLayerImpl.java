@@ -58,6 +58,10 @@ public class ServiceLayerImpl implements ServiceLayer{
     @Override
     public List<VehicleDto> ReturnFeatureAndSpecial() {
     	List<VehicleDto> allvehicles = vehicles.getAllVehicle();
+    	for(VehicleDto v: allvehicles) {
+			v.setModel(models.getModelByid(v.getModel().getId()));
+		}
+    	System.out.println(allvehicles.get(0).getModel().getManufacturer().getManufacturerName());
     	List<VehicleDto> featuredVehicles = allvehicles.stream().filter((v) -> v.isFeatured()).collect(Collectors.toList());
     	return featuredVehicles;
     }
@@ -102,6 +106,7 @@ public class ServiceLayerImpl implements ServiceLayer{
 	public purchase purchase(com.sg.cardealership.dto.purchase purchase) {
 		return purchases.addPurchase(purchase);
 	}
+
 
 	
 	//I think this is not needed, search behaves identically to sales search
