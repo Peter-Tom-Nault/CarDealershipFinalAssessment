@@ -141,44 +141,36 @@ public class OptionalFeatureDaoTest {
      */
     @Test
     public void testUpdateOptionalFeature() {
-        ManufacturerDto man1 = new ManufacturerDto();
-        man1.setCountry("Canada");
-        man1.setManufacturerName("BENZ");
-        man1 = manufact.addManufacturer(man1);
+        OptionalFeatureDto op1 = new OptionalFeatureDto();
+        op1.setName("option1");
+        op1 = option.addOptionalFeature(op1);
         
-        ManufacturerDto fromDao = manufact.getManufacturerById(man1.getId());
+        OptionalFeatureDto fromDao = option.getOptionalFeatureById(op1.getFeatureId());
         
-        assertEquals(man1, fromDao);
+        assertEquals(op1, fromDao);
         
-        man1.setManufacturerName("BMW");
+        op1.setName("option2");
         
-        manufact.updateManufacturer(man1);
+        option.updateOptionalFeature(op1);
         
-        assertNotEquals(man1, fromDao);
+        assertNotEquals(op1, fromDao);
         
-        fromDao = manufact.getManufacturerById(man1.getId());
+        fromDao = option.getOptionalFeatureById(op1.getFeatureId());
         
-        assertEquals(man1, fromDao);
+        assertEquals(op1, fromDao);
     }
     
     @Test
     public void testDeleteOptionalFeatureById() {
-//        ManufacturerDto man1 = new ManufacturerDto();
-//        man1.setCountry("Canada");
-//        man1.setManufacturerName("BENZ");
-//        man1 = manufact.addManufacturer(man1);
-//        
-//        ModelDto mod1 = new ModelDto();
-//        mod1.setManufacturer(man1);
-//        mod1.setModelName("1500");
-//        mod1.setTrim("trim1");
-//        mod1 = model.addModel(mod1);
-//        
-//        model.deleteModel(mod1.getId());
-//        
-//        ModelDto fromDao = model.getModelByid(mod1.getId());
-//        
-//        assertNull(fromDao); 
+        OptionalFeatureDto op1 = new OptionalFeatureDto();
+        op1.setName("option1");
+        op1 = option.addOptionalFeature(op1);
+    
+        option.deleteFromOptionalFeature(op1.getFeatureId());
+        
+        OptionalFeatureDto fromDao = option.getOptionalFeatureById(op1.getFeatureId());
+        
+        assertNull(fromDao); 
     }
 
 }

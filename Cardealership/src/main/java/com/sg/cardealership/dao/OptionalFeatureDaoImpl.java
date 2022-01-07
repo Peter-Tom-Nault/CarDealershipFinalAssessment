@@ -73,7 +73,7 @@ public class OptionalFeatureDaoImpl implements OptionalFeatureDao{
     @Override
     public void updateOptionalFeature(OptionalFeatureDto option) {
         final String UPDATE_OPTIONALFEATURE = "UPDATE optionalFeature SET name = ?"
-                + "WHERE id = ?";
+                + "WHERE featureId = ?";
         jdbc.update(UPDATE_OPTIONALFEATURE,
                 option.getName(),
                 option.getFeatureId());
