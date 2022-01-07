@@ -4,6 +4,7 @@ import com.sg.cardealership.dto.ContactInformationDto;
 import com.sg.cardealership.dto.InventoryReport;
 import com.sg.cardealership.dto.ManufacturerDto;
 import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
 import com.sg.cardealership.dto.SalesReport;
 import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.http.ResponseEntity;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/home")
 public class carDealershipController {
@@ -53,15 +54,21 @@ public class carDealershipController {
     
     //inventory/new GET
     //we should recieve jason as map of different objects, and decide what result we should return
-    @GetMapping("/inventory/new")
-    public List<VehicleDto> inventoryNew(@RequestBody Map<String, String> map)
+    @GetMapping("/inventory/new/{minYear}/{maxYear}/{minPrice}/{maxPrice}/{yearMakeModel}")
+    public List<VehicleDto> inventoryNew(@PathVariable Map<String, String> pathVariables)
     {
-        return service.getNewBasedOnUserEntry(map);
+    	//@PathVariable("yearMakeModel") String yearMakeModel, @PathVariable("minYear") int minYear, @PathVariable("maxYear") int maxYear, @PathVariable("minPrice") int minPrice, @PathVariable("maxPrice") int maxPrice
+    	//System.out.println(map);
+    	//HttpHeaders responseHeaders = new HttpHeaders();
+    	//System.out.println(yearMakeModel + minYear+maxYear+minPrice+maxPrice);
+    	//System.out.println(pathVariables);
+        return service.getNewBasedOnUserEntry(pathVariables);
+        //return null;
     }
     
-    @GetMapping("/inventory/used")
-    public List<VehicleDto> inventoryUsed(@RequestBody Map<String, String> map){
-    	return service.getUsedBasedOnUserEntry(map);
+    @GetMapping("/inventory/used/{minYear}/{maxYear}/{minPrice}/{maxPrice}/{yearMakeModel}")
+    public List<VehicleDto> inventoryUsed(@PathVariable Map<String, String> pathVariables){
+    	return service.getUsedBasedOnUserEntry(pathVariables);
     }
     
     //Home/Specials GET
@@ -87,10 +94,10 @@ public class carDealershipController {
 	
     //Sales/Index GET
     //search function that only available to sales person
-    @GetMapping("/Sales/Index")
-    public ResponseEntity<List<VehicleDto>> saleSearch(@RequestBody Map<String, String> map)
+    @GetMapping("/Sales/Index/{minYear}/{maxYear}/{minPrice}/{maxPrice}/{yearMakeModel}")
+    public ResponseEntity<List<VehicleDto>> saleSearch(@PathVariable Map<String, String> pathVariables)
     {
-        return ResponseEntity.ok(service.searchResultForSale(map));
+        return ResponseEntity.ok(service.searchResultForSale(pathVariables));
     }
     
     
@@ -232,5 +239,11 @@ public class carDealershipController {
 	@PostMapping("/account/login")
 	public int accountLogin(@RequestBody Map<String, String> map) {
 		return service.accountLogin(map);
+	}
+	
+	@GetMapping("/admin/option")
+	public ResponseEntity<List<OptionalFeatureDto>> getOptionalFeatures(){
+		HttpHeaders responseHeaders = new HttpHeaders();
+		return ResponseEntity.ok().headers(responseHeaders).body(service.getAllOptional());
 	}
 }

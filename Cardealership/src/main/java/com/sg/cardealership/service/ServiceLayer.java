@@ -8,6 +8,7 @@ import com.sg.cardealership.dto.ContactInformationDto;
 import com.sg.cardealership.dto.InventoryReport;
 import com.sg.cardealership.dto.ManufacturerDto;
 import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
 import com.sg.cardealership.dto.SalesReport;
 import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
@@ -72,6 +73,8 @@ public interface ServiceLayer {
 	public int accountLogin(Map<String, String> map);
 
 	public List<VehicleDto> getUsedBasedOnUserEntry(Map<String, String> map);
+
+	public List<OptionalFeatureDto> getAllOptional();
 
     
 }
