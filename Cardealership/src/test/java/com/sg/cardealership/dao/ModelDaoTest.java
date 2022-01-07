@@ -15,6 +15,8 @@ import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -100,10 +102,22 @@ public class ModelDaoTest {
     }
 
     /**
-     * Test of getModelByid method, of class ModelDao.
+     * Test of AddgetModel method, of class ModelDao.
      */
     @Test
-    public void testGetModelByid() {
+    public void testAddGetModel() {
+        ModelDto mod1 = new ModelDto();
+        ManufacturerDto man = new ManufacturerDto();
+        man.setCountry("Canada");
+        man.setManufacturerName("BMW");
+        man = manufact.addManufacturer(man);
+        mod1.setManufacturer(man);
+        mod1.setModelName("1500");
+        mod1.setTrim("trim1");
+        mod1 = model.addModel(mod1);
+        
+        ModelDto fromDao = model.getModelByid(mod1.getId());
+        assertEquals(mod1, fromDao);
     }
 
     /**
@@ -111,6 +125,31 @@ public class ModelDaoTest {
      */
     @Test
     public void testGetAllModels() {
+        ModelDto mod1 = new ModelDto();
+        ManufacturerDto man = new ManufacturerDto();
+        man.setCountry("Canada");
+        man.setManufacturerName("BMW");
+        man = manufact.addManufacturer(man);
+        mod1.setManufacturer(man);
+        mod1.setModelName("1500");
+        mod1.setTrim("trim1");
+        mod1 = model.addModel(mod1);
+        
+        ModelDto mod2 = new ModelDto();
+        ManufacturerDto man1 = new ManufacturerDto();
+        man1.setCountry("Canada1");
+        man1.setManufacturerName("BMW1");
+        man1 = manufact.addManufacturer(man1);
+        mod2.setManufacturer(man1);
+        mod2.setModelName("15001");
+        mod2.setTrim("trim11");
+        mod2 = model.addModel(mod2);
+        
+        List<ModelDto> models = model.getAllModels();
+        
+        assertEquals(2, models.size());
+        assertTrue(models.contains(mod1));
+        assertTrue(models.contains(mod2));
     }
 
     /**
@@ -118,13 +157,6 @@ public class ModelDaoTest {
      */
     @Test
     public void testGetModelsForManufacturer() {
-    }
-
-    /**
-     * Test of addModel method, of class ModelDao.
-     */
-    @Test
-    public void testAddModel() {
     }
 
     /**

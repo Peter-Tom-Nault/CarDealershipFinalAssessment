@@ -164,6 +164,8 @@ public class ContactInformationDaoTest {
         contact1.setMessage("nothingSpecial");
         contact1.setPhone(123456789);
         
+        contact1 = contact.addContactInfo(contact1);
+        
         ContactInformationDto fromDao = contact.getContactInfoById(contact1.getId());
         
         assertEquals(contact1, fromDao);

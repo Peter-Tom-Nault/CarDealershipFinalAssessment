@@ -50,7 +50,7 @@ public class AccountTypeDaoImpl implements AccountTypeDao{
     @Override
     public AccountTypeDto getAccountTypeById(int id) {
         try {
-            final String SELECT_ACCOUNTTYPE_BY_ID = "SELECT * FROM accounttypes WHERE id = ?";
+            final String SELECT_ACCOUNTTYPE_BY_ID = "SELECT * FROM accounttypes WHERE accountTypeId = ?";
             return jdbc.queryForObject(SELECT_ACCOUNTTYPE_BY_ID, new AccountTypeMapper(), id);
         } catch(DataAccessException ex) {
             return null;

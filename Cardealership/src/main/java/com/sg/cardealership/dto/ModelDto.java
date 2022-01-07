@@ -5,6 +5,7 @@
 package com.sg.cardealership.dto;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -42,6 +43,48 @@ public class ModelDto {
 	public void setManufacturer(ManufacturerDto manufacturer) {
 		this.manufacturer = manufacturer;
 	}
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.modelName);
+        hash = 23 * hash + Objects.hashCode(this.trim);
+        hash = 23 * hash + Objects.hashCode(this.manufacturer);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ModelDto other = (ModelDto) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.modelName, other.modelName)) {
+            return false;
+        }
+        if (!Objects.equals(this.trim, other.trim)) {
+            return false;
+        }
+        if (!Objects.equals(this.manufacturer, other.manufacturer)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelDto{" + "id=" + id + ", modelName=" + modelName + ", trim=" + trim + ", manufacturer=" + manufacturer + '}';
+    }
     
     
 }

@@ -121,7 +121,7 @@ public class AccountTypeDaoTest {
         account1.setAccountType("admin");
         account1 = account.addAccountType(account1);
         AccountTypeDto fromDao = account.getAccountTypeById(account1.getAccountTypeId());
-        assertEquals(account1, fromDao);
+        assertEquals(account1, fromDao);       
     }
     
     /**

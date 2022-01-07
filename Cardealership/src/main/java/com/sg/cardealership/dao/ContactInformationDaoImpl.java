@@ -54,7 +54,7 @@ public class ContactInformationDaoImpl implements ContactInformationDao{
     @Override
     public ContactInformationDto getContactInfoById(int id) {
         try {
-            final String SELECT_CONTACTINFORMATION_BY_ID = "SELECT * FROM contactInformation WHERE id = ?";
+            final String SELECT_CONTACTINFORMATION_BY_ID = "SELECT * FROM contactinformation WHERE id = ?";
             return jdbc.queryForObject(SELECT_CONTACTINFORMATION_BY_ID, new ContactInformationMapper(), id);
         } catch(DataAccessException ex) {
             return null;
