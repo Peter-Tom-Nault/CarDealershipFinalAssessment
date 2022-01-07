@@ -7,9 +7,9 @@ var $results = $('#searchResultULitems');
 $('#searchButton1').on('click', function() {
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:8080/inventory/',
+    url: 'http://localhost:8080/inventory/new',
     data: JSON.stringify({
-      modelMake: $('#makeModel').val(),
+      yearModelMake: $('#makeModel').val(),
       minPrice: $('#minPrice').val(),
       maxPrice: $('#maxPrice').val(),
       minYear: $('#minYear').val(),
