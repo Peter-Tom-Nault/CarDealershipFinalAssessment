@@ -14,9 +14,15 @@ import com.sg.cardealership.dto.Special;
 import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -105,33 +111,80 @@ public class AccountTypeDaoTest {
 
     }
     
-
+    /**
+     * Test of AddgetAccountType method, of class AccountTypeDao.
+     */
+    
+    @Test
+    public void testAddGetAccountType() {
+        AccountTypeDto account1 = new AccountTypeDto();
+        account1.setAccountType("admin");
+        account1 = account.addAccountType(account1);
+        AccountTypeDto fromDao = account.getAccountTypeById(account1.getAccountTypeId());
+        assertEquals(account1, fromDao);
+    }
+    
     /**
      * Test of getAllAccountType method, of class AccountTypeDao.
      */
+    
     @Test
     public void testGetAllAccountType() {
-    }
-
-    /**
-     * Test of getAccountTypeById method, of class AccountTypeDao.
-     */
-    @Test
-    public void testGetAccountTypeById() {
-    }
-
-    /**
-     * Test of addAccountType method, of class AccountTypeDao.
-     */
-    @Test
-    public void testAddAccountType() {
+        AccountTypeDto account1 = new AccountTypeDto();
+        account1.setAccountType("admin");
+        account1 = account.addAccountType(account1);
+        
+        AccountTypeDto account2 = new AccountTypeDto();
+        account2.setAccountType("user");
+        account2 = account.addAccountType(account2);
+        
+        List<AccountTypeDto> accounts = account.getAllAccountType();
+        
+        assertEquals(2, accounts.size());
+        assertTrue(accounts.contains(account1));
+        assertTrue(accounts.contains(account2));
     }
 
     /**
      * Test of updateAccountType method, of class AccountTypeDao.
      */
+    
     @Test
     public void testUpdateAccountType() {
+        AccountTypeDto account1 = new AccountTypeDto();
+        account1.setAccountType("admin");
+        account1 = account.addAccountType(account1);
+        
+        AccountTypeDto fromDao = account.getAccountTypeById(account1.getAccountTypeId());
+        
+        assertEquals(account1, fromDao);
+        
+        account1.setAccountType("user");
+        
+        account.updateAccountType(account1);
+        
+        assertNotEquals(account1, fromDao);
+        
+        fromDao = account.getAccountTypeById(account1.getAccountTypeId());
+        
+        assertEquals(account1, fromDao);
+    }
+    
+    /**
+     * Test of DeleteAccountType method, of class AccountTypeDao.
+     */
+    
+    @Test
+    public void testDeleteAccountType() {
+        AccountTypeDto account1 = new AccountTypeDto();
+        account1.setAccountType("admin");
+        account1 = account.addAccountType(account1);
+        
+        account.deleteAccountType(account1.getAccountTypeId());
+        
+        AccountTypeDto fromDao = account.getAccountTypeById(account1.getAccountTypeId());
+        
+        assertNull(fromDao);        
     }
     
 }
