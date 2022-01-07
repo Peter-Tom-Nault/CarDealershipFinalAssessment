@@ -10,13 +10,13 @@
 
   <title>Car Dealership</title>
 
-  <link rel="stylesheet" href="../assets/css/maicons.css">
+  <link rel="stylesheet" href="../../assets/css/maicons.css">
 
-  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
 
-  <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
+  <link rel="stylesheet" href="../../assets/vendor/animate/animate.css">
 
-  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
 </head>
 <body>
 
@@ -92,28 +92,10 @@
             <h2 class="mb-4 font-weight-medium text-secondary">Edit Vehicle</h2>
 
            <div class="row form-group"> <!--row form-group starts here-->
-                       <div class="col-md-6 mb-3 mb-md-0">
-                         <label class="text-black" for="make">Make</label>
-                           <select type="text" id="make" class="form-control" >
-                         <option selected>Car</option>
-                                          <option value="1">Audi</option>
-                                          <option value="2">BMW</option>
-                                          <option value="3">Mercedes</option>
-                                          <option value="4">Toyota</option>
-                                          <option value="5">Hyundai Motors</option>
-                                          <option value="6">Ford</option>
-                                          <option value="7">Fiat</option>
-                                          <option value="8">Porsche</option>
-                                          <option value="6">Ford</option>
-                                          <option value="10">Skoda</option>
-                                          <option value="11">Volkswagen</option>
-                                          <option value="12">Bentley</option>
-                                          <option value="13">Lamborghini</option>
-                                        </select>
-                       </div>
+                       
                        <div class="col-md-6">
                          <label class="text-black" for="model">Model</label>
-                        <select type="text" id="make" class="form-control" >
+                        <select type="text" id="model" class="form-control" >
                          <option selected>A4</option>
                                           <option value="1">A5</option>
                                           <option value="2">A6</option>
@@ -130,27 +112,28 @@
                                           <option value="13">Class-C</option>
                                         </select>
                        </div>
+                       <div class="col-md-6 mb-3 mb-md-0">
+                        <label class="text-black" for="optionals">Optionals</label>
+                        <select type="text" id="optionals" class="form-control" multiple></select>
+                       </div>
             </div><!--row form-group ends here-->
 
 
             <div class="row form-group"> <!--row form-group starts here-->
-                       <div class="col-md-6 mb-3 mb-md-0">
-                         <label class="text-black" for="type">Type</label>
-                         <input type="text" id="type" class="form-control">
-                       </div>
-                       <div class="col-md-6">
-                         <label class="text-black" for="bodystyle">Body Style</label>
-                          <select type="text" id="bodystyle" class="form-control" >
-                         <option selected>Car</option>
-                                          <option value="1">Sedan</option>
-                                          <option value="2">Coupe</option>
-                                          <option value="3">SUV</option>
-                                          <option value="4">Sports Car</option>
-                                          <option value="5">HatchBack</option>
-                                           <option value="6">Convertible</option>
-                                          <option value="7">Minivan</option>
-                                        </select>
-                       </div>
+                       
+              <div class="col-md-12">
+                <label class="text-black" for="bodystyle">Body Style</label>
+                 <select type="text" id="bodystyle" class="form-control" >
+                <option selected>Car</option>
+                                 <option value="1">Sedan</option>
+                                 <option value="2">Coupe</option>
+                                 <option value="3">SUV</option>
+                                 <option value="4">Sports Car</option>
+                                 <option value="5">HatchBack</option>
+                                  <option value="6">Convertible</option>
+                                 <option value="7">Minivan</option>
+                               </select>
+              </div>
             </div><!--row form-group ends here-->
              <div class="row form-group"> <!--row form-group starts here-->
                        <div class="col-md-6 mb-3 mb-md-0">
@@ -196,7 +179,7 @@
                        </div>
                        <div class="col-md-6">
                          <label class="text-black" for="vin">VIN #</label>
-                         <input type="text" id="vin" class="form-control">
+                         <select type="text" id="vin" class="form-control"></select>
                        </div>
             </div><!--row form-group ends here-->
 
@@ -242,10 +225,10 @@
             </div> -->
             <div class="row form-group mt-5 mb-5">
               <div class="col-md-6 text-right">
-                <input type="submit" value="Delete" class="btn btn-primary">
+                <input id="clearButton" value="reset" class="btn btn-primary">
               </div>
                <div class="col-md-6 text-left">
-                <input type="reset" value="Save" class="btn btn-warning">
+                <input id="submitButton" value="Save" class="btn btn-warning">
               </div>
             </div>
           </form>
@@ -299,15 +282,17 @@
     </div>
   </footer>
 
-<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="../../assets/js/jquery-3.5.1.min.js"></script>
 
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/bootstrap.bundle.min.js"></script>
 
-<script src="../assets/js/google-maps.js"></script>
+<script src="../../assets/js/google-maps.js"></script>
 
-<script src="../assets/vendor/wow/wow.min.js"></script>
+<script src="../../assets/vendor/wow/wow.min.js"></script>
 
-<script src="../assets/js/theme.js"></script>
+<script src="../../assets/js/theme.js"></script>
+
+<script src="../../assets/js/editVehicle.js"></script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIA_zqjFMsJM_sxP9-6Pde5vVCTyJmUHM&callback=initMap"></script>
 

@@ -111,10 +111,19 @@ public class carDealershipController {
 	
     //Admin/Vehicles GET
     //Needs to return json array of vehicles that are available for purchase based on searchc criteria
-    @GetMapping("/Admin/Vehicles")
-    public List<VehicleDto> adminSearch(@RequestBody Map<String, String> map)
+    @GetMapping("/Admin/Vehicles/{minYear}/{maxYear}/{minPrice}/{maxPrice}/{yearMakeModel}")
+    public List<VehicleDto> adminSearch(@PathVariable Map<String, String> pathVariables)
     {
-        return service.searchResultForSale(map);
+        return service.searchResultForSale(pathVariables);
+    }
+    
+  //Admin/Vehicles GET
+    //Needs to return json array of vehicles that are available for purchase based on searchc criteria
+    @GetMapping("/Admin/Vehicles/{minYear}/{maxYear}/{minPrice}/{maxPrice}")
+    public List<VehicleDto> adminSearchNoYMM(@PathVariable Map<String, String> pathVariables)
+    {
+    	pathVariables.put("yearMakeModel", "");
+        return service.searchResultForSale(pathVariables);
     }
     //Admin/AddVehicle POST
     //add a new vehicle to the database from the information provided

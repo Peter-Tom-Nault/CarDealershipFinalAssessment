@@ -153,7 +153,8 @@ public class VehicleDaoImpl implements VehicleDao{
     @Transactional
     public void updateVehicle(VehicleDto vehicle) {
         final String UPDATE_VEHICLE = "UPDATE vehicle "
-                + "SET modelID = ?, modelYear = ?, exteriorColor = ?, interiorColor = ?, bodyType = ?, transmission = ?, msrp = ?, saleprice = ?, photo = ?, mileage = ?, description = ?, purchased = ?, featured = ?";
+                + "SET modelID = ?, modelYear = ?, exteriorColor = ?, interiorColor = ?, bodyType = ?, transmission = ?, msrp = ?, saleprice = ?, photo = ?, mileage = ?, description = ?, purchased = ?, featured = ? "+
+        		"WHERE vin = ?";
         jdbc.update(UPDATE_VEHICLE,
                 vehicle.getModel().getId(),
                 vehicle.getYear(),
@@ -167,7 +168,8 @@ public class VehicleDaoImpl implements VehicleDao{
                 vehicle.getMileage(),
                 vehicle.getDescription(),
                 vehicle.isPurchased(),
-                vehicle.isFeatured());
+                vehicle.isFeatured(),
+                vehicle.getVin());
         
         final String DELETE_VEHICLE_OPTIONAL = "DELETE FROM vehicleOptional "
                 + "WHERE vehicleVin = ?";

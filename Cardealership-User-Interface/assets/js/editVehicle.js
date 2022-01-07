@@ -2,6 +2,7 @@ $(document).ready(function() {
     //alert('addVehicle.js found!');
     populateModels();
     populateOptionals();
+    populateVins();
   });
 
 
@@ -39,7 +40,21 @@ function populateOptionals(){
     
 }
 
-$('#addButton').on('click', function() {
+function populateVins(){
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/home/Admin/Vehicles/0/10000/0/30000000/e',
+        success: function(vehList){
+            $.each(vehList, function(index, veh){
+                $('#vin').append('<option>'+ veh.vin + '</option>')
+            })
+
+        }
+
+    })
+}
+
+$('#submitButton').on('click', function() {
     var optionalIds = $('#optionals').val();
     var optionalJsons = [];
     $.each(optionalIds, function(index, option){
@@ -48,8 +63,8 @@ $('#addButton').on('click', function() {
 
     })
     $.ajax({
-        type: 'POST',
-        url: 'http://localhost:8080/home/Admin/AddVehicle',
+        type: 'PUT',
+        url: 'http://localhost:8080/home/admin/editVehicle/VIN',
         data: JSON.stringify({
             vin: $('#vin').val(),
             year: $('#year').val(),
@@ -63,7 +78,7 @@ $('#addButton').on('click', function() {
             mileage: $('#mileage').val(),
             description: $('#message').val(),
             purchased: false,
-            featured: false,
+            featured: $('.messageCheckbox:checked').val(),
             model: {
                 id: $('#model').val()
             },
