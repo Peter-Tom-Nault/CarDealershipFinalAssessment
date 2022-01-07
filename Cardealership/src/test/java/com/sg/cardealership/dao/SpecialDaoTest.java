@@ -4,6 +4,7 @@
  */
 package com.sg.cardealership.dao;
 
+import com.sg.cardealership.TestApplicationConfiguration;
 import com.sg.cardealership.dto.Special;
 import java.util.List;
 import org.junit.After;
@@ -11,12 +12,16 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Cna
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = TestApplicationConfiguration.class)
 public class SpecialDaoTest {
     
     public SpecialDaoTest() {
