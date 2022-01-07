@@ -1,6 +1,7 @@
 $(document).ready(function() {
     // alert('addVehicle.js found!');
     populateVins();
+    populateSalespeople();
 });
 var today = new Date();
 
@@ -18,6 +19,18 @@ function populateVins(){
     })
 }
 
+function populateSalespeople(){
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/home/admin/users',
+        success: function(salesPersonList){
+            $.each(salesPersonList, function(index, sp){
+                $('#salesPersonId').append('<option value= "' + sp.userId + '">' + sp.userName +'</option>')
+            })
+        }
+    })
+}
+
 $('#saveBtn').on('click', function() {
     newModel = $('#model').val();
     optFeat = $('#optionals').val();
@@ -25,7 +38,9 @@ $('#saveBtn').on('click', function() {
         type: 'POST',
         url: 'http://localhost:8080/home/Sales/Purchase',
         data: JSON.stringify({
-            vin: $('#vin').val(),
+            vehicle: {
+                vin: $('#vin').val()
+            },
             date: $('#date').val(),
             custumerName: $('#name').val(),
             phone: $('#phone').val(),

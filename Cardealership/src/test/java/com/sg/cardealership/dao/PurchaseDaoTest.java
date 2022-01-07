@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -260,6 +261,72 @@ public class PurchaseDaoTest {
      */
     @Test
     public void testGetpurchasesForUser() {
+        purchase pu = new purchase();
+        Address ad = new Address();
+        ad.setCity("unknown");
+        ad.setState("u1");
+        ad.setStreet("num1");
+        ad.setZip(12345);
+        pu.setAddress(ad);       
+        UserDto user = new UserDto();
+        AccountTypeDto acc = new AccountTypeDto();
+        acc.setAccountType("admin");
+        acc = account.addAccountType(acc);
+        user.setAccount(acc);
+        user.setEmail("c@g.com");
+        user.setPassword("12345");
+        user.setUserName("s");
+        user = use.addUser(user);
+        pu.setUser(user);
+        
+        VehicleDto veh = new VehicleDto();
+        
+        ModelDto mod = new ModelDto();
+        
+        ManufacturerDto man12 = new ManufacturerDto();
+        man12.setCountry("germany");
+        man12.setManufacturerName("Unknown");
+        man12 = manufact.addManufacturer(man12);
+        
+        mod.setManufacturer(man12);
+        mod.setModelName("sa");
+        mod.setTrim("trim1");
+        mod = model.addModel(mod);
+        veh.setModel(mod);
+        
+        OptionalFeatureDto op = new OptionalFeatureDto();
+        op.setName("option1");
+        op = option.addOptionalFeature(op);
+        List<OptionalFeatureDto> options = new ArrayList<>();
+        options.add(op);
+        
+        veh.setOptional(options);
+        
+        veh.setBodyType("type1");
+        veh.setDescription("good car");
+        veh.setExteriorColor("yellow");
+        veh.setFeatured(true);
+        veh.setInteriorColor("black");
+        veh.setMileage(1250);
+        veh.setMsrp(BigDecimal.ZERO);
+        veh.setPhoto("jpg");
+        veh.setPurchased(true);
+        veh.setSalePrice(BigDecimal.ZERO);
+        veh.setTransmission("transmission1");
+        veh.setVin("asdasd123123");
+        veh.setYear(1234);
+        veh = vehicle.addVehicle(veh);
+        pu.setVehicle(veh);
+        
+        pu.setCustName("a");
+        pu.setDate(LocalDate.now());
+        pu.setEmail("@k");
+        pu.setPrice(BigDecimal.ONE);
+        pu = purchase.addPurchase(pu);
+        
+        List<purchase> pu1 =  purchase.getpurchasesForUser(user);
+        
+        assertEquals(pu1.size(), 1);
     }
 
     /**
@@ -267,6 +334,72 @@ public class PurchaseDaoTest {
      */
     @Test
     public void testGetpurchasesForVehicle() {
+        purchase pu = new purchase();
+        Address ad = new Address();
+        ad.setCity("unknown");
+        ad.setState("u1");
+        ad.setStreet("num1");
+        ad.setZip(12345);
+        pu.setAddress(ad);       
+        UserDto user = new UserDto();
+        AccountTypeDto acc = new AccountTypeDto();
+        acc.setAccountType("admin");
+        acc = account.addAccountType(acc);
+        user.setAccount(acc);
+        user.setEmail("c@g.com");
+        user.setPassword("12345");
+        user.setUserName("s");
+        user = use.addUser(user);
+        pu.setUser(user);
+        
+        VehicleDto veh = new VehicleDto();
+        
+        ModelDto mod = new ModelDto();
+        
+        ManufacturerDto man12 = new ManufacturerDto();
+        man12.setCountry("germany");
+        man12.setManufacturerName("Unknown");
+        man12 = manufact.addManufacturer(man12);
+        
+        mod.setManufacturer(man12);
+        mod.setModelName("sa");
+        mod.setTrim("trim1");
+        mod = model.addModel(mod);
+        veh.setModel(mod);
+        
+        OptionalFeatureDto op = new OptionalFeatureDto();
+        op.setName("option1");
+        op = option.addOptionalFeature(op);
+        List<OptionalFeatureDto> options = new ArrayList<>();
+        options.add(op);
+        
+        veh.setOptional(options);
+        
+        veh.setBodyType("type1");
+        veh.setDescription("good car");
+        veh.setExteriorColor("yellow");
+        veh.setFeatured(true);
+        veh.setInteriorColor("black");
+        veh.setMileage(1250);
+        veh.setMsrp(BigDecimal.ZERO);
+        veh.setPhoto("jpg");
+        veh.setPurchased(true);
+        veh.setSalePrice(BigDecimal.ZERO);
+        veh.setTransmission("transmission1");
+        veh.setVin("asdasd123123");
+        veh.setYear(1234);
+        veh = vehicle.addVehicle(veh);
+        pu.setVehicle(veh);
+        
+        pu.setCustName("a");
+        pu.setDate(LocalDate.now());
+        pu.setEmail("@k");
+        pu.setPrice(BigDecimal.ONE);
+        pu = purchase.addPurchase(pu);
+        
+        List<purchase> veh1 =  purchase.getpurchasesForVehicle(veh);
+        
+        assertEquals(veh1.size(), 1);
     }
 
 
@@ -275,6 +408,75 @@ public class PurchaseDaoTest {
      */
     @Test
     public void testUpdatePurchase() {
+        
+        purchase pu = new purchase();
+        Address ad = new Address();
+        ad.setCity("unknown");
+        ad.setState("u1");
+        ad.setStreet("num1");
+        ad.setZip(12345);
+        pu.setAddress(ad);       
+        UserDto user = new UserDto();
+        AccountTypeDto acc = new AccountTypeDto();
+        acc.setAccountType("admin");
+        acc = account.addAccountType(acc);
+        user.setAccount(acc);
+        user.setEmail("c@g.com");
+        user.setPassword("12345");
+        user.setUserName("s");
+        user = use.addUser(user);
+        pu.setUser(user);
+        
+        VehicleDto veh = new VehicleDto();
+        
+        ModelDto mod = new ModelDto();
+        
+        ManufacturerDto man12 = new ManufacturerDto();
+        man12.setCountry("germany");
+        man12.setManufacturerName("Unknown");
+        man12 = manufact.addManufacturer(man12);
+        
+        mod.setManufacturer(man12);
+        mod.setModelName("sa");
+        mod.setTrim("trim1");
+        mod = model.addModel(mod);
+        veh.setModel(mod);
+        
+        OptionalFeatureDto op = new OptionalFeatureDto();
+        op.setName("option1");
+        op = option.addOptionalFeature(op);
+        List<OptionalFeatureDto> options = new ArrayList<>();
+        options.add(op);
+        
+        veh.setOptional(options);
+        
+        veh.setBodyType("type1");
+        veh.setDescription("good car");
+        veh.setExteriorColor("yellow");
+        veh.setFeatured(true);
+        veh.setInteriorColor("black");
+        veh.setMileage(1250);
+        veh.setMsrp(BigDecimal.ZERO);
+        veh.setPhoto("jpg");
+        veh.setPurchased(true);
+        veh.setSalePrice(BigDecimal.ZERO);
+        veh.setTransmission("transmission1");
+        veh.setVin("asdasd123123");
+        veh.setYear(1234);
+        veh = vehicle.addVehicle(veh);
+        pu.setVehicle(veh);
+        
+        pu.setCustName("a");
+        pu.setDate(LocalDate.now());
+        pu.setEmail("@k");
+        pu.setPrice(BigDecimal.ONE);
+        pu = purchase.addPurchase(pu);
+        
+        purchase db = purchase.getPurchaseByid(pu.getId());
+        pu.setEmail("asdasdasda");
+        //purchase.updatePurchase(pu);
+        assertNotEquals(db, pu);
+        
     }
 
 }
