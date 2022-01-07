@@ -10,12 +10,12 @@ $('#searchButton1').on('click', function() {
     url: 'http://localhost:8080/inventory/new',
     data: JSON.stringify({
       yearModelMake: $('#makeModel').val(),
-      minPrice: $('#minPrice').val(),
-      maxPrice: $('#maxPrice').val(),
-      minYear: $('#minYear').val(),
-      maxYear: $('#maxYear').val()
+      minPrice: $('#minprice').val(),
+      maxPrice: $('#maxprice').val(),
+      minYear: $('#minYr').val(),
+      maxYear: $('#maxYr').val()
     }),
-    headers: {'Accept': 'application/json', 'Content-type': 'application/json'},
+    //headers: {'Accept': 'application/json', 'Content-type': 'application/json'},
     'dataType': 'json',
     success: function(results) {
       $.each(results, function(result) {
