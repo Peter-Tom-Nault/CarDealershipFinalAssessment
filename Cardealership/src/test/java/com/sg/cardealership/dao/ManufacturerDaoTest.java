@@ -15,6 +15,10 @@ import com.sg.cardealership.dto.UserDto;
 import com.sg.cardealership.dto.VehicleDto;
 import com.sg.cardealership.dto.purchase;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -98,26 +102,40 @@ public class ManufacturerDaoTest {
             vehicle.deleteVehicleById(v.getVin());
         }
     }
-
+    
+    /**
+     * Test of AddgetManufacturer method, of class ManufacturerDao.
+     */
+    @Test
+    public void testAddGetManufacturer() {
+        ManufacturerDto man1 = new ManufacturerDto();
+        man1.setCountry("Canada");
+        man1.setManufacturerName("BENZ");
+        man1 = manufact.addManufacturer(man1);
+        ManufacturerDto fromDao = manufact.getManufacturerById(man1.getId());
+        assertEquals(man1, fromDao);
+    }
+    
     /**
      * Test of getAllManufacturers method, of class ManufacturerDao.
      */
     @Test
     public void testGetAllManufacturers() {
-    }
-
-    /**
-     * Test of getManufacturerById method, of class ManufacturerDao.
-     */
-    @Test
-    public void testGetManufacturerById() {
-    }
-
-    /**
-     * Test of addManufacturer method, of class ManufacturerDao.
-     */
-    @Test
-    public void testAddManufacturer() {
+        ManufacturerDto man1 = new ManufacturerDto();
+        man1.setCountry("Canada");
+        man1.setManufacturerName("BENZ");
+        man1 = manufact.addManufacturer(man1);
+        
+        ManufacturerDto man2 = new ManufacturerDto();
+        man2.setCountry("Canada1");
+        man2.setManufacturerName("BENZ1");
+        man2 = manufact.addManufacturer(man2);
+        
+        List<ManufacturerDto> manfufacts = manufact.getAllManufacturers();
+        
+        assertEquals(2, manfufacts.size());
+        assertTrue(manfufacts.contains(man1));
+        assertTrue(manfufacts.contains(man2));
     }
 
     /**
@@ -125,6 +143,24 @@ public class ManufacturerDaoTest {
      */
     @Test
     public void testUpdateManufacturer() {
+        ManufacturerDto man1 = new ManufacturerDto();
+        man1.setCountry("Canada");
+        man1.setManufacturerName("BENZ");
+        man1 = manufact.addManufacturer(man1);
+        
+        ManufacturerDto fromDao = manufact.getManufacturerById(man1.getId());
+        
+        assertEquals(man1, fromDao);
+        
+        man1.setManufacturerName("BMW");
+        
+        manufact.updateManufacturer(man1);
+        
+        assertNotEquals(man1, fromDao);
+        
+        fromDao = manufact.getManufacturerById(man1.getId());
+        
+        assertEquals(man1, fromDao);
     }
 
     /**
@@ -132,6 +168,16 @@ public class ManufacturerDaoTest {
      */
     @Test
     public void testDeleteManufacturerById() {
+        ManufacturerDto man1 = new ManufacturerDto();
+        man1.setCountry("Canada");
+        man1.setManufacturerName("BENZ");
+        man1 = manufact.addManufacturer(man1);
+        
+        manufact.deleteManufacturerById(man1.getId());
+        
+        ManufacturerDto fromDao = manufact.getManufacturerById(man1.getId());
+        
+        assertNull(fromDao); 
     }
     
 }
