@@ -6,6 +6,14 @@ package com.sg.cardealership.dao;
 
 import com.sg.cardealership.TestApplicationConfiguration;
 import com.sg.cardealership.dto.AccountTypeDto;
+import com.sg.cardealership.dto.ContactInformationDto;
+import com.sg.cardealership.dto.ManufacturerDto;
+import com.sg.cardealership.dto.ModelDto;
+import com.sg.cardealership.dto.OptionalFeatureDto;
+import com.sg.cardealership.dto.Special;
+import com.sg.cardealership.dto.UserDto;
+import com.sg.cardealership.dto.VehicleDto;
+import com.sg.cardealership.dto.purchase;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -61,6 +69,46 @@ public class AccountTypeDaoTest {
         List<AccountTypeDto> accounts = account.getAllAccountType();
         for (AccountTypeDto acc : accounts) {
             account.deleteAccountType(acc.getAccountTypeId());
+        }
+        
+        List<ContactInformationDto> contacts = contact.getAllContactInformations();
+        for (ContactInformationDto c : contacts) {
+            contact.deleteContactById(c.getId());
+        }
+        
+        List<ManufacturerDto> manufacturers = manufact.getAllManufacturers();
+        for (ManufacturerDto m : manufacturers) {
+            manufact.deleteManufacturerById(m.getId());
+        }
+        
+        List<ModelDto> models = model.getAllModels();
+        for (ModelDto m : models) {
+            model.deleteModel(m.getId());
+        }
+        
+        List<OptionalFeatureDto> options = option.getAllOptionalFeatures();
+        for (OptionalFeatureDto o : options) {
+            option.deleteFromOptionalFeature(o.getFeatureId());
+        }
+        
+        List<purchase> purchases = purchase.getAllPurchases();
+        for (purchase p : purchases) {
+            purchase.deletePurchase(p.getId());
+        }
+        
+        List<Special> specials = special.getAllSpecials();
+        for (Special s : specials) {
+            special.deleteSpecialById(s.getId());
+        }
+        
+        List<UserDto> users = use.getAllUsers();
+        for (UserDto u : users) {
+            use.deletUser(u.getUserId());
+        }
+        
+        List<VehicleDto> vehicles = vehicle.getAllVehicle();
+        for (VehicleDto v : vehicles) {
+            vehicle.deleteVehicleById(v.getVin());
         }
 
     }

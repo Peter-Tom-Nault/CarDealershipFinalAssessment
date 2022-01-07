@@ -82,7 +82,12 @@ public class OptionalFeatureDaoImpl implements OptionalFeatureDao{
     @Override
     public void deleteFromOptionalFeature(int id)
     {
+        final String DELETE_FROM_OPTIONAL_VEHICLE = "DELETE FROM vehicleOptional "
+                + "WHERE featureId = ?";
+        jdbc.update(DELETE_FROM_OPTIONAL_VEHICLE, id);
         
+        final String DELETE_OPTIONAL = "DELETE FROM optionalFeature WHERE featureId = ?";
+        jdbc.update(DELETE_OPTIONAL, id);
     }
     
 }

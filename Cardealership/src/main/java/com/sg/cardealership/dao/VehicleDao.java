@@ -31,7 +31,7 @@ public interface VehicleDao {
     
     public void updateVehicle(VehicleDto vehicle);
     
-    public void deleteVehicleById(int id);
+    public void deleteVehicleById(String id);
     
     
 }

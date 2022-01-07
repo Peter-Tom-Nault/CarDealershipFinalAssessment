@@ -20,5 +20,5 @@ public interface PurchaseDao {
     public List<purchase> getpurchasesForVehicle(VehicleDto vehicle);
     public purchase addPurchase(purchase pu);
     public void updatePurchase(purchase pu);
-    
+    public void deletePurchase(int id);
 }

@@ -18,5 +18,6 @@ public interface UserDao{
     public List<UserDto> getUsersForAccountType(AccountTypeDto account);
     public UserDto addUser(UserDto user);
     public void updateUser(UserDto user);
+    public void deletUser(int id);
     
 }

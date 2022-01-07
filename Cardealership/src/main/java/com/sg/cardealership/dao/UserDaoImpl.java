@@ -118,4 +118,14 @@ public class UserDaoImpl implements UserDao{
                 user.getUserId());
     }
     
+    @Override
+    public void deletUser(int id)
+    {
+        final String DELETE_PURCHASE_USER = "DELETE FROM purchase WHERE salesPersonId = ?";
+        jdbc.update(DELETE_PURCHASE_USER, id);
+        
+        final String DELETE_USER = "DELETE FROM user WHERE userId = ?";
+        jdbc.update(DELETE_USER, id);
+    }
+    
 }

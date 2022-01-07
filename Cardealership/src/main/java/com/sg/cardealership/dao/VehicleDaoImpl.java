@@ -176,11 +176,15 @@ public class VehicleDaoImpl implements VehicleDao{
     }
     @Override
     @Transactional
-    public void deleteVehicleById(int id) {
+    public void deleteVehicleById(String id) {
         final String DELETE_VEHICLE_OPTIONAL = "DELETE FROM vehicleoptional "
                 + "WHERE vehicleVin = ?";
         jdbc.update(DELETE_VEHICLE_OPTIONAL, id);
-        
+    
+        final String DELETE_VEHICLE_PURCHASE = "DELETE FROM purchase "
+                + "WHERE VIN = ?";
+        jdbc.update(DELETE_VEHICLE_PURCHASE, id);
+            
         final String DELETE_VEHICLE = "DELETE FROM vehicle WHERE VIN = ?";
         jdbc.update(DELETE_VEHICLE, id);
     }    

@@ -165,6 +165,12 @@ public class PurchaseDaoImpl implements PurchaseDao{
                 pu.getAddress().getZip(),
                 pu.getEmail());
     }
+    @Override
+    public void deletePurchase(int id)
+    {
+        final String DELETE_PURCHASE = "DELETE FROM purchase WHERE id = ?";
+        jdbc.update(DELETE_PURCHASE, id);
+    }
 
 }
     
