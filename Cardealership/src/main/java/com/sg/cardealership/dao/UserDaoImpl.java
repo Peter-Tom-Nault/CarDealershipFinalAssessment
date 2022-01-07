@@ -109,7 +109,7 @@ public class UserDaoImpl implements UserDao{
     @Override
     public void updateUser(UserDto user) {
         final String UPDATE_USER = "UPDATE user "
-                + "SET username = ? accountType = ? passowrd = ? email = ? WHERE id = ?";
+                + "SET username = ? accountType = ? passowrd = ? email = ? WHERE userid = ?";
         jdbc.update(UPDATE_USER,
                 user.getUserName(),
                 user.getAccount().getAccountTypeId(),
